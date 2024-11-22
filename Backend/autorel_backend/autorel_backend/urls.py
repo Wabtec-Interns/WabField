@@ -20,7 +20,12 @@ from rest_framework import routers
 import autorelServerside.views as views
 
 router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
+router.register(r'users', views.UserViewSet),
+router.register(r'reports', views.ReportViewSet),
+router.register(r'comments', views.CommentViewSet),
+router.register(r'report_areas', views.Report_areaViewSet),
+router.register(r'attachments', views.AttachmentViewSet),
+router.register(r'report_history', views.Report_historyViewSet),
 
 urlpatterns = [
     path('', include(router.urls)),

@@ -38,6 +38,26 @@ def index_view(request):
 class UserViewSet(viewsets.ModelViewSet):
     queryset = models.User.objects.all()
     serializer_class = serializers.UserSerializer
+    
+class ReportViewSet(viewsets.ModelViewSet):
+    queryset = models.report.objects.all()
+    serializer_class = serializers.reportSerializer
+    
+class CommentViewSet(viewsets.ModelViewSet):
+    queryset = models.comment.objects.all()
+    serializer_class = serializers.commentSerializer
+    
+class AttachmentViewSet(viewsets.ModelViewSet):
+    queryset = models.attachment.objects.all()
+    serializer_class = serializers.attachmentSerializer
+    
+class Report_historyViewSet(viewsets.ModelViewSet):
+    queryset = models.report_history.objects.all()
+    serializer_class = serializers.report_historySerializer
+    
+class Report_areaViewSet(viewsets.ModelViewSet):
+    queryset = models.report_area.objects.all()
+    serializer_class = serializers.report_areaSerializer
 
 def test_settings(request):
     data = {
