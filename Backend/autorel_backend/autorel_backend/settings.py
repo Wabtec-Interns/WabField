@@ -9,24 +9,29 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-from decouple import config
+import os
+from dotenv import load_dotenv
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+env_path = os.path.join(BASE_DIR, '.env')
+print("carregando .env de:", env_path)
+load_dotenv(env_path)
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-kgk)bmrl*rbv@3cv2^1nj*vf1@0+hv$ra6ahy+#frfzz_jg9ve'
+SECRET_KEY = os.getenv('SECRET_KEY')
+print("SECRET_KEY", SECRET_KEY)
+DEBUG = os.getenv('DEBUG') == 'True'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False, cast=bool)
-
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=lambda v: [s.strip() for s in v.split(',')])
-print("ALLOWED_HOSTS", ALLOWED_HOSTS)
+allowed_hosts_env = os.getenv('ALLOWED_HOSTS')
+ALLOWED_HOSTS = allowed_hosts_env.split(',') if allowed_hosts_env else []
+print("ALLOWED_HOSTS", allowed_hosts_env)
 print("DEBUG", DEBUG)
 
 # Application definition
@@ -77,12 +82,12 @@ WSGI_APPLICATION = 'autorel_backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'autorelDB',
-        'USER': 'postgres',
-        'PASSWORD': '1311',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': os.getenv('DB_ENGINE'),
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
     }
 }
 
