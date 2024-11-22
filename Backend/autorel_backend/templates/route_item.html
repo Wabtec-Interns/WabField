@@ -1,0 +1,10 @@
+<li>
+    {{ route.pattern }}
+    {% if route.children %}
+        <ul>
+            {% for child in route.children %}
+                {% include 'route_item.html' with route=child %}
+            {% endfor %}
+        </ul>
+    {% endif %}
+</li>

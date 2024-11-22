@@ -19,6 +19,7 @@ from django.urls import path
 from autorelServerside import views
 
 urlpatterns = [
+    path('', views.index_view),
     path('admin/', admin.site.urls),
     path('test_settings/', views.test_settings),
 ]
