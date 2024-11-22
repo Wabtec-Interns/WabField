@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.urls import get_resolver
-from . import views
+from rest_framework import viewsets
+import autorelServerside.models as models
+import autorelServerside.serializers as serializers
 from django.conf import settings
 
 def get_routes():
@@ -32,6 +34,10 @@ def get_routes():
 def index_view(request):
     routes = get_routes()
     return render(request, 'index.html', {'routes': routes})
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = models.User.objects.all()
+    serializer_class = serializers.UserSerializer
 
 def test_settings(request):
     data = {
