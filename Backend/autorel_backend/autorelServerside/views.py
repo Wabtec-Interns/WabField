@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.urls import get_resolver
 from rest_framework import viewsets
+from django.contrib.contenttypes.models import ContentType
 import autorelServerside.models as models
 import autorelServerside.serializers as serializers
 from django.conf import settings
@@ -35,6 +36,10 @@ def index_view(request):
     routes = get_routes()
     return render(request, 'index.html', {'routes': routes})
 
+class AreaViewSet(viewsets.ModelViewSet):
+    queryset = models.area.objects.all()
+    serializer_class = serializers.areaSerializer
+
 class UserViewSet(viewsets.ModelViewSet):
     queryset = models.User.objects.all()
     serializer_class = serializers.UserSerializer
@@ -47,17 +52,25 @@ class CommentViewSet(viewsets.ModelViewSet):
     queryset = models.comment.objects.all()
     serializer_class = serializers.commentSerializer
     
+    def perform_create(self, serializer):
+        content_type_model = self.request.data.get('content_type')
+        object_id = self.request.data.get('object_id')
+        content_type = ContentType.objects.get(model=content_type_model)
+        serializer.save(content_type=content_type, object_id=object_id)
+    
 class AttachmentViewSet(viewsets.ModelViewSet):
     queryset = models.attachment.objects.all()
     serializer_class = serializers.attachmentSerializer
     
+    def perform_create(self, serializer):
+        content_type_model = self.request.data.get('content_type')
+        object_id = self.request.data.get('object_id')
+        content_type = ContentType.objects.get(model=content_type_model)
+        serializer.save(content_type=content_type, object_id=object_id)
+    
 class Report_historyViewSet(viewsets.ModelViewSet):
     queryset = models.report_history.objects.all()
     serializer_class = serializers.report_historySerializer
-    
-class Report_areaViewSet(viewsets.ModelViewSet):
-    queryset = models.report_area.objects.all()
-    serializer_class = serializers.report_areaSerializer
 
 def test_settings(request):
     data = {

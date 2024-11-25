@@ -34,6 +34,9 @@ ALLOWED_HOSTS = allowed_hosts_env.split(',') if allowed_hosts_env else []
 print("ALLOWED_HOSTS", allowed_hosts_env)
 print("DEBUG", DEBUG)
 
+CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED_ORIGINS').split(',')
+print("CORS_ALLOWED_ORIGINS", CORS_ALLOWED_ORIGINS)
+
 # Application definition
 
 INSTALLED_APPS = [
