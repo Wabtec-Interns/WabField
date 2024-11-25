@@ -7,6 +7,15 @@ class User(models.Model):
     user_email = models.EmailField(max_length=100, unique=True)
     user_password = models.CharField(max_length=50)
     user_role = models.CharField(max_length=50)
+    user_area = models.ForeignKey('area', on_delete=models.CASCADE)
+    user_type = models.Choices(
+        'Internal', 
+        'External',
+    )
+    internal_type_user = models.Choices(
+        'Admin',
+        'Employee',
+    )
     def __str__(self):
         return self.user_name
     
@@ -20,6 +29,14 @@ class report(models.Model):
     
     def __str__(self):
         return self.report_title
+    
+class checklist_report (models.Model):
+    checklist_id = models.AutoField(primary_key=True)
+    checklist_name = models.CharField(max_length=100)
+    checklist_description = models.TextField(editable=True)
+    checklist_date = models.DateField()
+    checklist_owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    checklist_observation = models.TextField(editable=True)
     
 class comment(models.Model):
     comment_id = models.AutoField(primary_key=True)
@@ -51,12 +68,23 @@ class report_history(models.Model):
     def __str__(self):
         return self.history_description
     
-class report_area(models.Model):
+class area(models.Model):
     area_id = models.AutoField(primary_key=True)
-    area_name = models.CharField(max_length=100)
-    area_report = models.ForeignKey(report, on_delete=models.CASCADE)
+    area_name = models.Choices(
+        'Implantação',
+        'EHS',
+        'Engenharia',
+        'Subdiv',
+        'N/A',
+    )
     
     def __str__(self):
         return self.area_name
+class report_area(models.Model):
+    area_id = models.ForeignKey(area, on_delete=models.CASCADE)
+    area_report = models.ForeignKey(report, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return self.area_report
     
     
