@@ -17,3 +17,11 @@ body {
   min-height: 100vh;
 }
 
+@layer components {
+  .navbar {
+    @apply bg-red-800 text-white rounded-b-lg border-b-4 border-white fixed top-0 w-full;
+  }
+
+
+}
+

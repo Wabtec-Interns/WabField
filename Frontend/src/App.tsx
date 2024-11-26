@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router'
 import Home from './pages/LoggedIn/Home'
 import Login from './pages/Form/Login'
 import Register from './pages/Form/Register'
+import LoggedInLayout from './pages/LoggedIn/loggedInLayout'
 
 function App() {
 
@@ -9,7 +10,9 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route element={<LoggedInLayout />}>
+            <Route path="/" element={<Home />} />
+          </Route>
           
           <Route path='validation\login' element={<Login />} />
           <Route path='validation\register' element={<Register />} />
