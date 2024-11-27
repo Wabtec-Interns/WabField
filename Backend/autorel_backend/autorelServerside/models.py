@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 
@@ -34,6 +35,43 @@ class survey(models.Model):
     survey_start_date = models.DateField()
     survey_end_date = models.DateField()
     survey_owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    
+class comment(models.Model):
+    comment_id = models.AutoField(primary_key=True)
+    comment_text = models.TextField(editable=True)
+    comment_date = models.DateField()
+    comment_owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True, blank=True)
+    object_id = models.PositiveIntegerField(null=True, blank=True)
+    content_object = GenericForeignKey('content_type', 'object_id')
+        
+    def __str__(self):
+        return self.comment_text
+    
+class attachment(models.Model):
+    attachment_id = models.AutoField(primary_key=True)
+    attachment_name = models.CharField(max_length=100)
+    attachment_description = models.TextField(editable=True)
+    attachment_date = models.DateField()
+    attachment_owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True, blank=True)
+    object_id = models.PositiveIntegerField(null=True, blank=True)
+    content_object = GenericForeignKey('content_type', 'object_id')
+    
+    def __str__(self):
+        return self.attachment_name
+    
+# encapsula reports e checklist reports para obter o historico
+class report_history(models.Model):
+    history_id = models.AutoField(primary_key=True)
+    history_date = models.DateField()
+    history_owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True, blank=True)
+    object_id = models.PositiveIntegerField(null=True, blank=True)
+    content_object = GenericForeignKey('content_type', 'object_id')
+    
+    def __str__(self):
+        return self.history_description
     
 class LaborType(models.Model):
     labor_type_id = models.AutoField(primary_key=True)
@@ -87,7 +125,7 @@ class LaborType(models.Model):
        return self.labor_subtype
     
     
-class report_activities(models.Model):
+class ReportActivities(models.Model):
     STAGE_CHOICES = [
         ('Infra', 'Etapa de Infraestrutura'),
         ('Installation', 'Etapa de Instalação'),
@@ -114,7 +152,7 @@ class report_activities(models.Model):
         ('Cleaning and Organization', 'Limpeza e Organização do Local'),
     ]
     
-    report_model = models.ForeignKey('Report', on_delete=models.CASCADE, related_name='activities')
+    report = models.ForeignKey('Report', on_delete=models.CASCADE, related_name='report_activities')
     stage = models.CharField(max_length=50, choices=STAGE_CHOICES, default='Infra')
     sub_stage = models.CharField(max_length=50, choices=INFRA_SUBSTAGE_CHOICES + INSTALLATION_SUBSTAGE_CHOICES + FINAL_SUBSTAGE_CHOICES, null=True, blank=True)
     planned_completion_task = models.CharField(max_length=10, default='100%')
@@ -134,7 +172,15 @@ class report_activities(models.Model):
                 self.accumulated = self.actual_completion_task
                 
         if self.start_time and self.end_time:
+            start = timezone.datetime.combine(timezone.now(), self.start_time)
+            end = timezone.datetime.combine(timezone.now(), self.end_time)
+            total_duration = end - start
+            total_hours = total_duration.total_seconds() / 3600
+            self.total_hours = f"{total_hours:.2f} horas"
             
+        super().save(*args, **kwargs)
+    def __str__(self):
+        return f"{self.get_stage_display()} - {self.get_sub_stage_display()}"
     
 class report(models.Model):
     REPORT_STATUS_CHOICES = [
@@ -161,10 +207,10 @@ class report(models.Model):
     report_title = models.CharField(max_length=100)
     report_description = models.TextField(editable=True)
     
-    report_work_hours_start = models.TimeField()
-    report_work_hours_end = models.TimeField()
-    report_interval_hours_start = models.TimeField()
-    report_interval_hours_end = models.TimeField()
+    report_work_hours_start = models.TimeField(blank=True, null=True)
+    report_work_hours_end = models.TimeField(blank=True, null=True)
+    report_interval_hours_start = models.TimeField(blank=True, null=True)
+    report_interval_hours_end = models.TimeField(blank=True, null=True)
     
     report_status = models.CharField(max_length=50, choices=REPORT_STATUS_CHOICES, default='Open')
     report_date = models.DateField()
@@ -179,7 +225,10 @@ class report(models.Model):
     afternoon_work_condition = models.CharField(max_length=50, choices=WORK_CONDITION_CHOICES, default='Practicable')
     night_work_condition = models.CharField(max_length=50, choices=WORK_CONDITION_CHOICES, default='Practicable')
     
-    labor_type = models.ManyToManyField(LaborType, related_name='reports', null=True, blank=True)
+    labor_type = models.ManyToManyField(LaborType, related_name='reports', blank=True)
+    activities = models.ManyToManyField(ReportActivities, related_name='report_activities', blank=True)
+    comments = models.ManyToManyField(comment, related_name='reports', blank=True)
+    attachments = models.ManyToManyField(attachment, related_name='reports', blank=True)
     
     def __str__(self):
         return self.report_title
@@ -193,42 +242,7 @@ class checklist_report (models.Model):
     checklist_owner = models.ForeignKey(User, on_delete=models.CASCADE)
     checklist_observation = models.TextField(editable=True)
     
-class comment(models.Model):
-    comment_id = models.AutoField(primary_key=True)
-    comment_text = models.TextField(editable=True)
-    comment_date = models.DateField()
-    comment_owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True, blank=True)
-    object_id = models.PositiveIntegerField(null=True, blank=True)
-    content_object = GenericForeignKey('content_type', 'object_id')
-        
-    def __str__(self):
-        return self.comment_text
-    
-class attachment(models.Model):
-    attachment_id = models.AutoField(primary_key=True)
-    attachment_name = models.CharField(max_length=100)
-    attachment_description = models.TextField(editable=True)
-    attachment_date = models.DateField()
-    attachment_owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True, blank=True)
-    object_id = models.PositiveIntegerField(null=True, blank=True)
-    content_object = GenericForeignKey('content_type', 'object_id')
-    
-    def __str__(self):
-        return self.attachment_name
-    
-# encapsula reports e checklist reports para obter o historico
-class report_history(models.Model):
-    history_id = models.AutoField(primary_key=True)
-    history_date = models.DateField()
-    history_owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True, blank=True)
-    object_id = models.PositiveIntegerField(null=True, blank=True)
-    content_object = GenericForeignKey('content_type', 'object_id')
-    
-    def __str__(self):
-        return self.history_description
+
     
 class area(models.Model):
     area_id = models.AutoField(primary_key=True)
