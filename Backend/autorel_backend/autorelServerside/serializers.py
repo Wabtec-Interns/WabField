@@ -12,7 +12,27 @@ class UserSerializer(serializers.ModelSerializer):
         model = models.User
         fields = '__all__'
         
+class laborTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.LaborType
+        fields = '__all__'
+
+class reportActivitiesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.ReportActivities
+        fields = '__all__'
+
+class checklistReportSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.checklist_report
+        fields = '__all__'
+        
 class reportSerializer(serializers.ModelSerializer):
+    labor_type = laborTypeSerializer(many=True, read_only=True)
+    activities = reportActivitiesSerializer(many=True, read_only=True)
+    comments = serializers.PrimaryKeyRelatedField(many=True, queryset=models.comment.objects.all())
+    attachments = serializers.PrimaryKeyRelatedField(many=True, queryset=models.attachment.objects.all())
+    
     class Meta:
         model = models.report
         fields = '__all__'

@@ -26,6 +26,9 @@ router.register(r'reports', views.ReportViewSet),
 router.register(r'comments', views.CommentViewSet),
 router.register(r'attachments', views.AttachmentViewSet),
 router.register(r'report_history', views.Report_historyViewSet),
+router.register(r'labor_types', views.LaborTypeViewSet)
+router.register(r'report_activities', views.ReportActivitiesViewSet)
+router.register(r'checklist_reports', views.ChecklistReportViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

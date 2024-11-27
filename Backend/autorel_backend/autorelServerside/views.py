@@ -71,6 +71,18 @@ class AttachmentViewSet(viewsets.ModelViewSet):
 class Report_historyViewSet(viewsets.ModelViewSet):
     queryset = models.report_history.objects.all()
     serializer_class = serializers.report_historySerializer
+    
+class LaborTypeViewSet(viewsets.ModelViewSet):
+    queryset = models.LaborType.objects.all()
+    serializer_class = serializers.laborTypeSerializer
+
+class ReportActivitiesViewSet(viewsets.ModelViewSet):
+    queryset = models.ReportActivities.objects.all()
+    serializer_class = serializers.reportActivitiesSerializer
+
+class ChecklistReportViewSet(viewsets.ModelViewSet):
+    queryset = models.checklist_report.objects.all()
+    serializer_class = serializers.checklistReportSerializer
 
 def test_settings(request):
     data = {
