@@ -12,6 +12,7 @@ function App() {
         <Routes>
           <Route element={<LoggedInLayout />}>
             <Route path="/" element={<Home />} />
+            <Route path="/survey" element={<Home />} />
           </Route>
           
           <Route path='validation\login' element={<Login />} />
