@@ -1,3 +1,5 @@
+import GeneralProjectStatsCard from "@/components/GeneralProjectStatsCard";
+
 export default function Home() {
   return (
     <>
@@ -6,8 +8,8 @@ export default function Home() {
           <h1>Last project visited</h1>
         </section>
 
-        <section className="w-2/3 h-full bg-blue-800 rounded-md">
-          <h1>General Project Stats</h1>
+        <section className="w-2/3 h-full gap-2 p-2 bg-amber-50 rounded-md">
+          <GeneralProjectStatsCard />
         </section>
       </div>
     </>
