@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-empty-object-type */
-import { Badge, Box, HStack } from '@chakra-ui/react'
+import { Badge, Box, HStack, Image } from '@chakra-ui/react'
 import { PureComponent, ReactNode } from 'react'
 import { Pie, PieChart, ResponsiveContainer, Sector, PieProps } from 'recharts'
 
@@ -73,7 +73,7 @@ class GeneralProjectStatsCard extends PureComponent<{}, GeneralProjectStatsCardS
             <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
             <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333">{`Relatórios: ${value}`}</text>
             <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={18} textAnchor={textAnchor} fill="#999">
-              {`(Rate ${(percent * 100).toFixed(2)}%)`}
+              {`(Porcentagem: ${(percent * 100).toFixed(2)}%)`}
             </text>
           </g>
         );
@@ -89,8 +89,25 @@ class GeneralProjectStatsCard extends PureComponent<{}, GeneralProjectStatsCardS
 
         return (
           <Box w={'100%'} h={'100%'} borderWidth={'1px'} borderRadius={'md'} >
-              <ResponsiveContainer width={1400} height={600}>
-                  <PieChart width={400} height={400}>
+            <HStack p='4' justifyContent='space-between'>
+              <HStack w={'100%'} justifyContent='center'>
+                <Box p='4' display='flex' alignItems='center'>
+                  <Box w='40px' h='40px' bg='gray.200' borderRadius='md' mr='4'>
+                      <Image src={CardData.imageUrl} alt='Wabtec' />
+                  </Box>
+                  <Box>
+                      <Box fontSize='lg' fontWeight='bold'>
+                          {CardData.title}
+                      </Box>
+                      <Box fontSize='sm' color='gray.500'>
+                          {CardData.description}
+                      </Box>
+                  </Box>
+                </Box>
+              </HStack>
+
+              <ResponsiveContainer width={1000} height={600}>
+                  <PieChart width={600} height={600}>
                       <Pie 
                         data={PieChartdata} 
                         dataKey="value" 
@@ -106,19 +123,21 @@ class GeneralProjectStatsCard extends PureComponent<{}, GeneralProjectStatsCardS
                       />
                   </PieChart>
               </ResponsiveContainer>
+            </HStack>
       
-              <Box
-                  p='4' 
-                  spaceY='2'
-      
-              >
-                  <HStack>
-                      <Badge colorPalette='teal' variant={'solid'}>20</Badge>
-                      <Badge colorScheme='blue'>10</Badge>
-                      <Badge colorScheme='red'>5</Badge>
-                      <Badge colorScheme='yellow'>5</Badge>
-                  </HStack>
-              </Box>
+            <Box
+                p='4' 
+                spaceY='2'
+    
+            >
+                <HStack>
+                    {PieChartdata.map((data, index) => (
+                      <Badge key={index} colorPalette={getColorPallete(data.name)}>
+                        Relatórios {data.name} : {data.value}
+                      </Badge>
+                    ))}
+                </HStack>
+            </Box>
           </Box>
         )
     }
@@ -126,10 +145,32 @@ class GeneralProjectStatsCard extends PureComponent<{}, GeneralProjectStatsCardS
 }
 
 const PieChartdata: PieChartData[] = [
-    { name: 'Relatórios em Andamento', value: 20 },
-    { name: 'Relatórios Finalizados', value: 10 },
-    { name: 'Relatórios Cancelados', value: 5 },
-    { name: 'Relatórios Rejeitados', value: 5 },
+    { name: 'em Andamento', value: 20 },
+    { name: 'Finalizados', value: 10 },
+    { name: 'Cancelados', value: 5 },
+    { name: 'Rejeitados', value: 5 },
 ]
+
+const CardData = {
+  imageUrl: '../assets/Wabtec-logo.jpeg',
+  title: 'Visão geral dos relatórios',
+  description: 'Acompanhe facilmente o status geral dos relatórios criados pelo pessoal de seu setor. Entenda de forma simplificada a taxa de sucesso de nossos surveys.',
+  footer: 'Atualizado 3 minutos atrás',
+}
+
+function getColorPallete(name: string): string {
+  switch (name) {
+    case 'em Andamento':
+      return 'blue';
+    case 'Finalizados':
+      return 'green';
+    case 'Cancelados':
+      return 'red';
+    case 'Rejeitados':
+      return 'yellow';
+    default:
+      return 'blue';
+  }
+}
 
 export default GeneralProjectStatsCard
