@@ -14,8 +14,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/survey" element={<Home />} />
           </Route>
-          
-          
+
           <Route path='validation\login' element={<Login />} />
           <Route path='validation\register' element={<Register />} />
         </Routes>
