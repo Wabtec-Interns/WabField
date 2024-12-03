@@ -1,11 +1,19 @@
+import { Image } from "@chakra-ui/react"
+import wabtecLogoSvg from "../assets/WAB.D.svg"
+import { Link } from "react-router"
+
 const Navbar = () => {
   return (
     <div className="navbar p-2">
-        <div className="outline outline-1 p-1 rounded-sm justify-between bg-black/40 w-fit">
+      <Link to="/">
+        <a className="outline flex outline-1 p-1 rounded-sm justify-between bg-black/40 w-fit">
             <h1 className="">
               WabField
             </h1>
-        </div>
+
+            <Image src={wabtecLogoSvg} className="w-5 h-5 ml-2" alt="logo" />
+        </a>
+      </Link>
     </div>
   )
 }
