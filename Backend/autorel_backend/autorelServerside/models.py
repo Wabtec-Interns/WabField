@@ -189,6 +189,12 @@ class report(models.Model):
         ('In Progress', 'Em Andamento'),
     ]
     
+    TYPE_REPORT_CHOICES = [
+        ('Survey', 'Visita'),
+        ('Acompanhamento de Obra'),
+        ('Comissionamento')
+    ]
+    
     WEATHER_CONDITION_CHOICES = [
         ('Sunny', 'Ensolarado'),
         ('Cloudy', 'Nublado'),
