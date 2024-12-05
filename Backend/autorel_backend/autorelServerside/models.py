@@ -191,8 +191,8 @@ class report(models.Model):
     
     TYPE_REPORT_CHOICES = [
         ('Survey', 'Visita'),
-        ('Acompanhamento de Obra'),
-        ('Comissionamento')
+        ('Project Monitoring','Acompanhamento de Obra'),
+        ('Commissioning','Comissionamento')
     ]
     
     WEATHER_CONDITION_CHOICES = [
