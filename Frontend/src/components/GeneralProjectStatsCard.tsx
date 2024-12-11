@@ -102,13 +102,13 @@ class GeneralProjectStatsCard extends PureComponent<{}, GeneralProjectStatsCardS
                 <Box w='400px' h='200px' bg='gray.200' borderRadius='md'>
                   <Image src={CardData.imageUrl} className='w-full h-full' alt='Wabtec' />
                 </Box>
-                <Box fontSize='lg' fontWeight='bold'>
+                <Box fontSize='lg' fontWeight='bold' color='black'>
                   {CardData.title}
                 </Box>
                 <Box fontSize='sm' color='gray.500'>
                   {CardData.description}
                 </Box>
-              </VStack>
+              </VStack> 
               <ResponsiveContainer width={600} height={600}>
                 <PieChart width={600} height={600}>
                   <Pie 

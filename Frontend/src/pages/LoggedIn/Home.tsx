@@ -9,7 +9,7 @@ export default function Home() {
           <LastReportVisitedCard />
         </section>
 
-        <section className="w-2/3 h-full gap-2 p-2 bg-amber-50 rounded-md">
+        <section className="w-2/3 h-full gap-2 p-2 bg-gray-300 rounded-md">
           <GeneralProjectStatsCard />
         </section>
       </div>
