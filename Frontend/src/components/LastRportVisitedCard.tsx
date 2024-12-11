@@ -1,4 +1,4 @@
-import { Box, Collapsible } from "@chakra-ui/react"
+import { Badge, Box, Card, Collapsible, Image } from "@chakra-ui/react"
 import { mockProject, mockReport } from "../assets/mockData"
 
 
@@ -12,7 +12,7 @@ const LastReportVisitedCard = () => {
                 </Collapsible.Trigger>
                 <Collapsible.Content>
                     <Box
-                        padding={4}
+                        padding={2}
                         borderRadius="md"
                         borderWidth={1}
                         boxShadow="lg"
@@ -20,11 +20,39 @@ const LastReportVisitedCard = () => {
                         shadow={'md'}
                     >
                         <div className="flex flex-col gap-2">
-                            <h1 className="text-2xl">{mockReport.reportTitle}</h1>
-                            <p className="text-lg">{mockReport.reportDescription}</p>
-                            <p className="text-lg">Date: {mockReport.reportDate}</p>
-                            <p className="text-lg">Status: {mockReport.reportStatus}</p>
-                            <p className="text-lg">Type: {mockReport.reportType}</p>
+                            <Card.Root
+                                flexDirection={'row'}
+                                justifyContent={'space-between'}
+                                alignItems={'center'}
+                                borderWidth={1}
+                                borderRadius={'md'}
+                                boxShadow={'md'}
+                                padding={4}
+                                bg={'blackAlpha.600'}
+                                shadow={'md'}
+                                maxW={'fit'}
+                            >
+                                <Image 
+                                    src={mockReport.reportImage}
+                                    alt="Report"
+                                    objectFit={'cover'}
+                                    borderRadius="md"
+                                    boxShadow="md"
+                                    maxW={'150px'}
+                                />
+
+                                <Box>
+                                    <Card.Body>
+                                        <Card.Title>{mockReport.reportTitle}</Card.Title>
+                                        <Card.Description>{mockReport.reportDescription}</Card.Description>
+                                        <Card.Footer mt={'4'}>
+                                            <Badge>{mockReport.reportDate}</Badge>
+                                            <Badge>Status: {mockReport.reportStatus}</Badge>
+                                            <Badge>Type: {mockReport.reportType}</Badge>
+                                        </Card.Footer>
+                                    </Card.Body>
+                                </Box>
+                            </Card.Root>
                         </div>
                     </Box>
                 </Collapsible.Content>
@@ -48,6 +76,7 @@ const LastReportVisitedCard = () => {
                         shadow={'md'} 
                     >
                         <div className="flex flex-col gap-2">
+                            <img src={mockProject.projectImage} alt="Project" className="w-1/2 h-1/2" />
                             <h1 className="text-2xl">{mockProject.projectName}</h1>
                             <p className="flex flex-col gap-2 text-lg">{mockProject.projectDescription}</p>
                             <p className="flex flex-col gap-2 text-lg">Start Date: {mockProject.projectStartDate}</p>

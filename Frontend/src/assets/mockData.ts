@@ -1,9 +1,15 @@
+import MRSLoco  from '../assets/MRS_AC44i-30x40.jpg'
+import RailwayImage from '../assets/Beena Vision TruckView.jpg'
+
 export class MockReportData {
+
+
     reportTitle: string;
     reportDescription: string;
     reportDate: string;
     reportStatus: string;
     reportType: string;
+    reportImage: string;
 
     constructor() {
         this.reportTitle = 'Relatório de Visita Técnica';
@@ -11,6 +17,7 @@ export class MockReportData {
         this.reportDate = new Date().toLocaleString();
         this.reportStatus = 'Open';
         this.reportType = 'Survey';
+        this.reportImage = MRSLoco;
     }
 }
 
@@ -27,6 +34,7 @@ export class MockProjectData {
     employedCompany: string;
     clientCompany: string;
     intermediaryCompany: string;
+    projectImage: string;
 
     constructor() {
         this.projectName = 'Projeto de Reforma';
@@ -39,6 +47,7 @@ export class MockProjectData {
         this.employedCompany = 'Empresa Empregadora';
         this.clientCompany = 'Empresa Cliente';
         this.intermediaryCompany = 'Empresa Intermediaria';
+        this.projectImage = RailwayImage;
     }
 }
 
