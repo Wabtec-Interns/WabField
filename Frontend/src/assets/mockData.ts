@@ -43,7 +43,7 @@ export class MockProjectData {
         this.projectEndDate = new Date().toLocaleString();
         this.projectStatus = 'Em Andamento';
         this.projectPeriod = 'Mensal';
-        this.reportSummary = 10;
+        this.reportSummary = 45;
         this.employedCompany = 'Empresa Empregadora';
         this.clientCompany = 'Empresa Cliente';
         this.intermediaryCompany = 'Empresa Intermediaria';

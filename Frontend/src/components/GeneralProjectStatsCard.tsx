@@ -95,7 +95,7 @@ class GeneralProjectStatsCard extends PureComponent<{}, GeneralProjectStatsCardS
     render() {
 
         return (
-          <Box w={'100%'} h={'100%'} borderWidth={'1px'} borderRadius={'md'} >
+          <Box w={'100%'} h={'800px'} borderWidth={'1px'} borderRadius={'md'} >
             
             <HStack w={'100%'} h={'100%'} justifyContent='center' alignItems='center'>
               <VStack p='4' alignItems='flex-start' spaceY='4'>
@@ -105,7 +105,7 @@ class GeneralProjectStatsCard extends PureComponent<{}, GeneralProjectStatsCardS
                 <Box fontSize='lg' fontWeight='bold' color='black'>
                   {CardData.title}
                 </Box>
-                <Box fontSize='sm' color='gray.500'>
+                <Box fontSize='sm' color='gray.500' w={'400px'}>
                   {CardData.description}
                 </Box>
               </VStack> 
@@ -158,7 +158,7 @@ const PieChartdata: PieChartData[] = [
 const CardData = {
   imageUrl: WabtecLogo,
   title: 'Visão geral dos relatórios',
-  description: 'Acompanhe facilmente o status geral dos relatórios criados pelo pessoal de seu setor. Entenda de forma simplificada a taxa de sucesso de nossos surveys.',
+  description: 'Acompanhe facilmente o status geral dos relatórios criados pelo pessoal de seu setor. Entenda de forma simplificada a taxa de sucesso de nossos projetos.',
   footer: 'Atualizado 3 minutos atrás',
 }
 
