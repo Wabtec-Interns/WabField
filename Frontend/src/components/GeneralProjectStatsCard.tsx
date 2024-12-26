@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-empty-object-type */
-import { Badge, Box, HStack, Image, SimpleGrid, Tabs, TabsContent } from '@chakra-ui/react'
+import { Badge, Box, HStack, Image, SimpleGrid, Tabs, TabsContent, TabsList, TabsTrigger } from '@chakra-ui/react'
 import { PureComponent } from 'react'
 import { Pie, PieChart, ResponsiveContainer, Sector, PieProps } from 'recharts'
 import WabtecLogo from '../assets/Wabtec_Corporation-Logo.wine.svg'
@@ -96,7 +96,6 @@ class GeneralProjectStatsCard extends PureComponent<{}, GeneralProjectStatsCardS
 
         return (
           <>
-          
             <Tabs.Root
               key={'tab'}
               defaultValue={'Description'}
@@ -109,112 +108,150 @@ class GeneralProjectStatsCard extends PureComponent<{}, GeneralProjectStatsCardS
               <SimpleGrid
                 columns={1}
                 gap={2}
-                width={'full'}
-                p='4'
-                bg='white'
-                borderRadius='md'
-                borderWidth='1px'
-                textAlign='center'
-                alignItems='center'
-                justifyContent='center'
+                p={4}
+                bg={'white'}
+                borderRadius={'md'}
+                borderWidth={'1px'}
+                textAlign={'center'}
+                alignItems={'center'}
+                justifyContent={'center'}
               >
-              
-                <Tabs.List
-                  key={'tabList'}
+                <TabsList
+                  key={'homepage-card-tabs'}
                   display={'flex'}
                   flexDirection={'row'}
                   justifyContent={'center'}
-                  p='2'
-                  gap={2}
-                  bg='red.800'
-                  color={'white'}
                   alignContent={'center'}
-                  textAlign={'center'}  
-                  border={'2px solid'}
-                  borderColor={'gray.200'}
+                  alignItems={'center'}
+                  textAlign={'center'}
+
+                  p={2}
+                  gap={2}
+                  bg={'red.800'}
+                  borderRadius={'md'}
+                  borderWidth={'2px'}
+                  borderColor={'gray.focusRing'}
+                  _hover={{
+                    bg: 'red.600',
+                    rounded: '2xl',
+                  }}
+                  _active={{
+                    bg: 'red.600',
+                    rounded: '2xl',
+                  }}
+                  _focus={{
+                    bg: 'red.600',
+                    rounded: '2xl',
+                  }}
+                  animation={
+                    'scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both'
+                  }
+                  transition={'all 0.25s'}
                 >
-                  <Tabs.Trigger
+                  <TabsTrigger
+                    key={'description'}
                     value='Description'
-                    _active={{ bg: 'red.600', rounded: '2xl' }}
-                    _focus={{ bg: 'red.600', rounded: '2xl' }}
-                    _hover={{ bg: 'red.600', rounded: '2xl' }}
-                    animation={'scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both'}
-                    transition={'all 0.25s'}
-                    className='gap-2 p-2' 
-
-                  >
-                    Descrição Geral
-                  </Tabs.Trigger>
-
-                  <Tabs.Trigger
-                    value='Dashboard'
                     className='gap-2 p-2'
-                    _active={{ bg: 'red.600', rounded: '2xl' }}
-                    _focus={{ bg: 'red.600', rounded: '2xl' }}
-                    _hover={{ bg: 'red.600', rounded: '2xl' }}
-                    animation={'scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both'}
-                    transition={'all 0.25s'}
+                  >
+                    <p>Descrição Geral</p>
+                  </TabsTrigger>
+
+                  <TabsTrigger
+                    key={'chart'}
+                    value='Chart'
+                    className='gap-2 p-2'
+                    >
+                    <p>Gráfico</p>
+                  </TabsTrigger>
+                </TabsList>
+              </SimpleGrid>
+
+              <TabsContent
+                key={'homepage-card-content'}
+                value={'Description'}
+              >
+                <Box
+                  h={'800px'}
+                  borderWidth={'1px'}
+                  borderRadius={'md'}
+                  display={'flex'}
+                 
+                  textAlign={'center'}
+                  alignItems={'center'}
+                  flexDirection={'column'}
+                >
+                  <div 
+                    className='p-2 gap-2'
+                  />
+                  <Box
+                    w={'1200px'}
+                    h={'200px'}
+                    bg={'gray.200'}
+                    borderRadius={'md'}
+                    borderWidth={'1px'}
+                    display={'flex'}
+                    textAlign={'center'}
+                    alignItems={'center'}
+                    justifyContent={'center'}
 
                   >
-                    Dashboard
-                  </Tabs.Trigger>
-                </Tabs.List>
-              
-            </SimpleGrid>
+                    
+                      <Image
+                        src={CardData.imageUrl}
+                        alt={'Wabtec Corporation Logo'}
+                        w={'100%'}
+                        h={'100%'}
+                        borderRadius={'md'}
+                        objectFit={'fill'}
+                        p={2}
+                        gap={2}
+                        bg={'gray.200'}
+                        _hover={{
+                          bg: 'gray.400',
+                          rounded: '2xl',
+                        }}
+                        _active={{
+                          bg: 'gray.400',
+                          rounded: '2xl',
+                        }}
+                        _focus={{
+                          bg: 'gray.400',
+                          rounded: '2xl',
+                        }}
+                        animation={
+                          'scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both'
+                        }
+                        transition={'all 0.25s'}
+                        
+                      />
+                    
+                  </Box>
 
-            <Box w={'100%'} h={'800px'} borderWidth={'1px'} borderRadius={'md'} >
-              <Tabs.Content 
-                value='Description'
-              />
-                  <Box w='400px' h='200px' bg='gray.200' borderRadius='md'>
-                    <Image src={CardData.imageUrl} className='w-full h-full' alt='Wabtec' />
-                  </Box>
-                  <Box p='4' />
-                  <Box fontSize='lg' fontWeight='bold' color='black'>
-                    {CardData.title}
-                  </Box>
-                  <Box p='2' />
-                  <Box fontSize='sm' color='gray.500' w={'400px'}>
-                    {CardData.description}
+                  <Box className='p-2 gap-2' />
+
+                  <Box
+                    w={'1200px'}
+                    h={'400px'}
+                    bg={'gray.200'}
+                    borderRadius={'md'}
+                    borderWidth={'1px'}
+                    
+                    display={'flex'}
+                    flexDirection={'column'}
+                    textAlign={'center'}
+                    alignItems={'center'}
+                    justifyContent={'center'}
+                    color={'black'}
+                  >
+                    <h1
+                      className='text-2xl first-letter:text-3xl first-letter:font-bold first-letter:text-blue-500'
+                    >
+                      {CardData.title}
+                    </h1>
+                    <p>{CardData.description}</p>
                   </Box>
                 </Box>
-                
-              </Tabs.Content>
-              
-              <Tabs.Content
-                value='Dashboard'
-              >
-                <ResponsiveContainer width={600} height={600}>
-                  <PieChart width={600} height={600}>
-                    <Pie 
-                      data={PieChartdata} 
-                      activeIndex={this.state.activeIndex}
-                      activeShape={renderActiveShapeWrapper}
-                      onMouseEnter={this.onPieEnter}
-                      dataKey="value" 
-                      nameKey="name" 
-                      cx="50%" 
-                      cy="50%" 
-                      innerRadius={60} 
-                      outerRadius={80} 
-                      fill='#8884d8' 
-                    />
-                  </PieChart>
-                </ResponsiveContainer>
-        
-                <Box
-                    p='4' 
-                    spaceY='2'
-                >
-                    <HStack>
-                        {PieChartdata.map((data, index) => (
-                          <Badge key={index} colorPalette={getColorPallete(data.name)}>
-                            Relatórios {data.name} : {data.value}
-                          </Badge>
-                        ))}
-                    </HStack>
-                </Box>
-              </Tabs.Content>
+              </TabsContent>
             </Tabs.Root>
           </>
         )
