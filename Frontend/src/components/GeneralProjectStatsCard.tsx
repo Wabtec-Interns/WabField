@@ -252,6 +252,81 @@ class GeneralProjectStatsCard extends PureComponent<{}, GeneralProjectStatsCardS
                   </Box>
                 </Box>
               </TabsContent>
+
+              <TabsContent
+                key={'homepage-card-content'}
+                value={'Chart'}
+              >
+                <Box
+                  h={'800px'}
+                  borderWidth={'1px'}
+                  borderRadius={'md'}
+                  display={'flex'}
+                  textAlign={'center'}
+                  alignItems={'center'}
+                  flexDirection={'column'}
+                >
+                  <div 
+                    className='p-2 gap-2'
+                  />
+                  <Box
+                    w={'1200px'}
+                    h={'200px'}
+                    bg={'gray.200'}
+                    borderRadius={'md'}
+                    borderWidth={'1px'}
+                    display={'flex'}
+                    textAlign={'center'}
+                    alignItems={'center'}
+                    justifyContent={'center'}
+                  >
+                    <ResponsiveContainer width='100%' height='100%'>
+                      <PieChart>
+                        <Pie
+                          activeIndex={this.state.activeIndex}
+                          activeShape={renderActiveShapeWrapper}
+                          data={PieChartdata}
+                          cx='50%'
+                          cy='50%'
+                          innerRadius={60}
+                          outerRadius={80}
+                          fill='#8884d8'
+                          dataKey='value'
+                          onMouseEnter={this.onPieEnter}
+                        />
+                      </PieChart>
+                    </ResponsiveContainer>
+                  </Box>
+                  <Box className='p-2 gap-2' />
+                  <Box
+                    w={'1200px'}
+                    h={'400px'}
+                    bg={'gray.200'}
+                    borderRadius={'md'}
+                    borderWidth={'1px'}
+                    display={'flex'}
+                    flexDirection={'column'}
+                    textAlign={'center'}
+                    alignItems={'center'}
+                    justifyContent={'center'}
+                    color={'black'}
+                  >
+                    <h1
+                      className='text-2xl first-letter:text-3xl first-letter:font-bold first-letter:text-blue-500'
+                    >
+                      {CardData.title}
+                    </h1>
+                    <p>{CardData.description}</p>
+                    <HStack>
+                      {PieChartdata.map((entry, index) => (
+                        <Badge key={index} colorScheme={getColorPallete(entry.name)}>
+                          {entry.name}
+                        </Badge>
+                      ))}
+                    </HStack>
+                  </Box>
+                </Box>
+              </TabsContent>
             </Tabs.Root>
           </>
         )
