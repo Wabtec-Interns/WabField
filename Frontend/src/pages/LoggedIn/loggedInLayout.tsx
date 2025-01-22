@@ -8,7 +8,7 @@ const loggedInLayout = () => {
         <Navbar />
        
        
-       <section className='flex mt-20 flex-col'>
+       <section className='flex mt-20 min-w-full flex-col'>
           <Outlet />
        </section>
       </div>

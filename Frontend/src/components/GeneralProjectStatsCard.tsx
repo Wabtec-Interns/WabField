@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 /* eslint-disable @typescript-eslint/no-empty-object-type */
 import { Badge, Box, HStack, Image, SimpleGrid, Tabs, TabsContent, TabsList, TabsTrigger } from '@chakra-ui/react'
 import { PureComponent } from 'react'
@@ -271,7 +271,7 @@ class GeneralProjectStatsCard extends PureComponent<{}, GeneralProjectStatsCardS
                   />
                   <Box
                     w={'1200px'}
-                    h={'200px'}
+                    h={'400px'}
                     bg={'gray.200'}
                     borderRadius={'md'}
                     borderWidth={'1px'}
