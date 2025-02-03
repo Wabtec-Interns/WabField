@@ -3,6 +3,8 @@ import Home from './pages/LoggedIn/Home'
 import Login from './pages/Form/Login'
 import Register from './pages/Form/Register'
 import LoggedInLayout from './pages/LoggedIn/loggedInLayout'
+import ProjectsList from './pages/LoggedIn/projectsList'
+import { MockProjectData } from './assets/mockData'
 
 function App() {
 
@@ -12,7 +14,7 @@ function App() {
         <Routes>
           <Route element={<LoggedInLayout />}>
             <Route path="/" element={<Home />} />
-            <Route path="/survey" element={<Home />} />
+            <Route path="/survey" element={<ProjectsList projects={MockProjectData} />} />
           </Route>
 
           <Route path='validation\login' element={<Login />} />

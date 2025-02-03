@@ -1,9 +1,10 @@
 import { Badge, Box, Card, Collapsible, Image } from "@chakra-ui/react"
-import { mockProject, mockReport } from "../assets/mockData"
+import { mockProjects, mockReport } from "../assets/mockData"
 import { ArrowBigRightDash } from "lucide-react"
 
 
 const LastReportVisitedCard = () => {
+    const lastProject = mockProjects[mockProjects.length - 1];
   return (
     <>
         <section className="flex justify-center items-center text-center p-2 gap-2">
@@ -98,7 +99,7 @@ const LastReportVisitedCard = () => {
                                 maxW={'fit'}
                             >
                                 <Image 
-                                    src={mockProject.projectImage}
+                                    src={lastProject.projectImage}
                                     alt="Project"
                                     objectFit={'cover'}
                                     borderRadius="md"
@@ -110,20 +111,20 @@ const LastReportVisitedCard = () => {
                                     <Card.Body 
                                         className="text-white"
                                     >
-                                        <Card.Title>{mockProject.projectName}</Card.Title>
-                                        <Card.Description>{mockProject.projectDescription}</Card.Description>
+                                        <Card.Title>{lastProject.projectName}</Card.Title>
+                                        <Card.Description>{lastProject.projectDescription}</Card.Description>
                                         <Card.Footer mt={'4'}>
                                             <div
                                                 className="flex flex-col gap-2"
                                             >
-                                            <Badge>Start date: {mockProject.projectStartDate}</Badge>
-                                            <Badge>End date: {mockProject.projectEndDate}</Badge>
-                                            <Badge>Status: {mockProject.projectStatus}</Badge>
-                                            <Badge>Period: {mockProject.projectPeriod}</Badge>
-                                            <Badge>Report Summary: {mockProject.reportSummary}</Badge>
-                                            <Badge>Employed Company: {mockProject.employedCompany}</Badge> 
-                                            <Badge>Intermediary Company: {mockProject.intermediaryCompany}</Badge>
-                                            <Badge>Client Company: {mockProject.clientCompany}</Badge>
+                                            <Badge>Start date: {lastProject.projectStartDate}</Badge>
+                                            <Badge>End date: {lastProject.projectEndDate}</Badge>
+                                            <Badge>Status: {lastProject.projectStatus}</Badge>
+                                            <Badge>Period: {lastProject.projectPeriod}</Badge>
+                                            <Badge>Report Summary: {lastProject.reportSummary}</Badge>
+                                            <Badge>Employed Company: {lastProject.employedCompany}</Badge> 
+                                            <Badge>Intermediary Company: {lastProject.intermediaryCompany}</Badge>
+                                            <Badge>Client Company: {lastProject.clientCompany}</Badge>
                                             </div>
                                         </Card.Footer>
                                     </Card.Body>
