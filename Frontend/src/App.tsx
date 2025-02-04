@@ -5,6 +5,8 @@ import Register from './pages/Form/Register'
 import LoggedInLayout from './pages/LoggedIn/loggedInLayout'
 import ProjectsList from './pages/LoggedIn/projectsList'
 import { MockProjectData } from './assets/mockData'
+import Password from './pages/Form/ForgotPassword'
+import FormLayout from './pages/Form/FormLayout'
 
 function App() {
   return (
@@ -15,6 +17,12 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/survey" element={<ProjectsList projects={MockProjectData} />} />
           </Route>
+          <Route element={<FormLayout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/validation/login" element={<Login />} />
+            <Route path="/validation/register" element={<Register />} />
+            <Route path="/validation/password" element={<Password />} />
+            </Route>
         </Routes>
       </BrowserRouter>
     </>
