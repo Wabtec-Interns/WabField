@@ -4,11 +4,11 @@ import Navbar from '../../components/Navbar'
 const loggedInLayout = () => {
   return (
     <>
-      <div className='min-h-screen bg-gray-900 flex flex-col'>
+      <div className='min-h-screen flex bg-gray-900 w-full h-full flex-col'>
         <Navbar />
        
        
-       <section className='flex mt-20 min-w-full flex-col'>
+       <section className='flex mt-20  min-w-full flex-col flex-grow'>
           <Outlet />
        </section>
       </div>
