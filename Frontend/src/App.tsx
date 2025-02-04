@@ -18,7 +18,6 @@ function App() {
             <Route path="/survey" element={<ProjectsList projects={MockProjectData} />} />
           </Route>
           <Route element={<FormLayout />}>
-            <Route path="/" element={<Home />} />
             <Route path="/validation/login" element={<Login />} />
             <Route path="/validation/register" element={<Register />} />
             <Route path="/validation/password" element={<Password />} />
