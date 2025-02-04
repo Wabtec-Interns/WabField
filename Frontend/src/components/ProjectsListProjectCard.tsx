@@ -15,7 +15,7 @@ const ProjectsListProjectCard = ({ projectName, projectDescription, visits, proj
         w={'90%'} 
         overflow="hidden" 
         m={2}
-        ml={12}
+        
         cursor='pointer'
         transition={'transform 0.3s ease, box-shadow 0.3s ease'}
         _hover={{
@@ -37,7 +37,7 @@ const ProjectsListProjectCard = ({ projectName, projectDescription, visits, proj
       />
 
       {/* Card Content */}
-      <Box position="relative" p={4} w="100%" h="100%" backgroundColor={'rgba(0, 0, 0, 0.5)'}>
+      <Box position="relative" p={20} w="100%" h="100%" backgroundColor={'rgba(0, 0, 0, 0.5)'}>
         <Heading size={'md'} color="white">
             {projectName}
         </Heading>

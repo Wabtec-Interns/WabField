@@ -16,18 +16,23 @@ const ProjectsList = () => {
 
     return (
         <>
+            <div
+             className='p-5 flex flex-col gap-2 justify-center items-center '
+            >
 
-            {mainProject ? (
-                <ProjectsListProjectCard {...mainProject} />
-            ) : (
-                <Text>Loading main project...</Text>
-            )}
+                {mainProject ? (
+                    <ProjectsListProjectCard {...mainProject} />
+                ) : (
+                    <Text>Loading main project...</Text>
+                )}
 
-            <Grid templateColumns="repeat(2, 1fr)" gap={6} mt={4}>
-                {secondaryProjects.map((project, index) => (
-                    <ProjectsListProjectCard key={index} {...project} />
-                ))}
-            </Grid>
+                <Grid templateColumns="repeat(2, 1fr)" gap={1} mt={4}>
+                    {secondaryProjects.map((project, index) => (
+                        <ProjectsListProjectCard key={index} {...project} />
+                    ))}
+                </Grid>
+            </div>
+
 
 
     
