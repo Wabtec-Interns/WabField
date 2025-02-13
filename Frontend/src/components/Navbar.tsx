@@ -1,8 +1,18 @@
-import { Image } from "@chakra-ui/react"
+import { Image, useDisclosure } from "@chakra-ui/react"
 import wabtecLogoSvg from "../assets/WAB.D.svg"
 import { Link } from "react-router"
+import { useState } from "react"
 
 const Navbar = () => {
+
+  const {isOpen, onOpen, onClose} = useDisclosure()
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+  const handleLogin = () => {
+    setIsLoggedIn(true)
+  }
+
   return (
     <div className="navbar p-2">
       <Link to="/">
