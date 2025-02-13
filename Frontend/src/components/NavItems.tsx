@@ -1,6 +1,6 @@
 
 import { useColorModeValue } from './ui/color-mode'
-import { Box, Link, Popover, PopoverContent, PopoverRoot, PopoverTrigger, Stack, Text } from '@chakra-ui/react'
+import { Box, Link, PopoverContent, PopoverRoot, PopoverTrigger, Stack, Text } from '@chakra-ui/react'
 
 
 const routes = [
@@ -109,4 +109,6 @@ const desktopSubnav = ({ label, link, sublabel }: NavItem) => {
         </>
     )
 }
+
+export default DesktopNav
 
