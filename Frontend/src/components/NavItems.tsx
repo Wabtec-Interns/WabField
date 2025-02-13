@@ -1,6 +1,6 @@
 
 import { useColorModeValue } from './ui/color-mode'
-import { Box, Link, Popover, PopoverTrigger, Stack } from '@chakra-ui/react'
+import { Box, Link, Popover, PopoverContent, PopoverRoot, PopoverTrigger, Stack, Text } from '@chakra-ui/react'
 
 
 const routes = [
@@ -38,11 +38,9 @@ const DesktopNav = () => {
         <Box
             key={route.label}
         >
-            <Popover
-                trigger={'hover'}
-                placement={'bottom-start'}
+            <PopoverRoot
             >
-                <PopoverTrigger>
+                <PopoverTrigger asChild>
                     <Link
                         href={route.link}
                         className='text-white hover:text-gray-300 px-2 py-1 rounded-md text-sm font-medium'
@@ -50,11 +48,65 @@ const DesktopNav = () => {
                         {route.label}
                     </Link>
                 </PopoverTrigger>
-            </Popover>
+
+                {route.children && (
+                    <PopoverContent
+                        border={0}
+                        boxShadow={'xl'}
+                        bg={colorModeValue}
+                        p={4}
+                        rounded={'xl'}
+                        minW={'sm'}
+                    >
+                        <Stack>
+                        {route.children.map((child) => (
+                            <desktopSubnav key={child.label} {...child} />
+                        ))}
+                </Stack>
+                    </PopoverContent>
+                )}
+            </PopoverRoot>
         </Box>
       ))}
     </Stack>
    </>
   )
+}
+
+interface NavItem {
+    label: string
+    sublabel?: string
+    children?: Array<NavItem>
+    link?: string
+  }
+
+const desktopSubnav = ({ label, link, sublabel }: NavItem) => {
+    return (
+        <>
+            <Link
+                href={link}
+                className='group display-block p-2 rounded-md hover:bg-red-50'
+            >
+                <Stack
+                    direction={'row'}
+                    align={'center'}
+                >
+                    <Box>
+                        <Text
+                            transition={'all .3s ease'}
+                            _groupHover={{
+                                color: 'red.400'
+                            }}
+                            fontWeight={500}
+                        >
+                            {label}
+                        </Text>
+
+                        <Text fontSize={'sm'}>{sublabel}</Text>
+                    </Box>
+                </Stack>
+            </Link>
+        </>
+    )
 }
 
