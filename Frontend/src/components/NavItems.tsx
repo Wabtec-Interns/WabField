@@ -1,6 +1,9 @@
 
+import { ChevronRightIcon } from 'lucide-react'
 import { useColorModeValue } from './ui/color-mode'
-import { Box, Link, PopoverContent, PopoverRoot, PopoverTrigger, Stack, Text } from '@chakra-ui/react'
+import { Box, Link, PopoverContent, PopoverRoot, PopoverTrigger, Stack } from '@chakra-ui/react'
+import DesktopSubnav from './DesktopSubnav'
+
 
 
 const routes = [
@@ -57,10 +60,11 @@ const DesktopNav = () => {
                         p={4}
                         rounded={'xl'}
                         minW={'sm'}
+                        zIndex={50}
                     >
                         <Stack>
                         {route.children.map((child) => (
-                            <desktopSubnav key={child.label} {...child} />
+                            <DesktopSubnav key={child.label} {...child} />
                         ))}
                 </Stack>
                     </PopoverContent>
@@ -71,43 +75,6 @@ const DesktopNav = () => {
     </Stack>
    </>
   )
-}
-
-interface NavItem {
-    label: string
-    sublabel?: string
-    children?: Array<NavItem>
-    link?: string
-  }
-
-const desktopSubnav = ({ label, link, sublabel }: NavItem) => {
-    return (
-        <>
-            <Link
-                href={link}
-                className='group display-block p-2 rounded-md hover:bg-red-50'
-            >
-                <Stack
-                    direction={'row'}
-                    align={'center'}
-                >
-                    <Box>
-                        <Text
-                            transition={'all .3s ease'}
-                            _groupHover={{
-                                color: 'red.400'
-                            }}
-                            fontWeight={500}
-                        >
-                            {label}
-                        </Text>
-
-                        <Text fontSize={'sm'}>{sublabel}</Text>
-                    </Box>
-                </Stack>
-            </Link>
-        </>
-    )
 }
 
 export default DesktopNav
