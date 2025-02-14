@@ -19,7 +19,7 @@ const Navbar = () => {
   }
 
   return (
-    <div className="navbar p-2">
+    <div className="navbar p-2 flex justify-between">
       <Link to="/">
         <a className="outline flex outline-1 p-1 rounded-sm justify-between bg-black/40 w-fit">
             <h1 className="">
@@ -33,13 +33,13 @@ const Navbar = () => {
       <Flex
         display={
         {
-          base: 'none',
-          md: 'flex'
+          base: 'revert',
+          md: 'flex',
         }
         }
+        flex={1}
         alignItems="center"
         justifyContent="center"
-        border={1}
       >
         <DesktopNav  />
       </Flex>
