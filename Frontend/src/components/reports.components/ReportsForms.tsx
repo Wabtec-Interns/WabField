@@ -18,7 +18,6 @@ type FormData = {
   nightWork: string;
   weatherCondition: string;
   workCondition: string;
-  profissionalResponsable: string;
 };
 
 const REPORT_STATUS_CHOICES = [
@@ -47,11 +46,6 @@ const WORK_CONDITION_CHOICES = [
   ["Unpracticable", "Impraticável"],
 ];
 
-const PROFISSIONAL_RESPONSABLE_CHOICHES = [
-  ["Mario", "Mario"],
-  ["Mario 2", "Mario 2"],
-];
-
 const ReportForms = () => {
   const [formData, setFormData] = useState<FormData>({
     status: "",
@@ -67,7 +61,6 @@ const ReportForms = () => {
     nightWork: "",
     weatherCondition: "",
     workCondition: "",
-    profissionalResponsable: "",
   });
 
   useEffect(() => {
