@@ -298,7 +298,12 @@ const ReportForms = () => {
         </div>
 
 
-        <div></div>
+        <div>
+          
+        </div>
+        <div> 
+
+        </div>
 
         {formData.typeContract && (
         <div className="mb-3 text-left ml-1" style={{ flex: 1, margin: '0 10px', padding: '20px', border: '1px solid #000', textAlign: 'center' }}>
