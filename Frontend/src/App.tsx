@@ -7,6 +7,10 @@ import ProjectsList from './pages/LoggedIn/projectsList'
 import { MockProjectData } from './assets/mockData'
 import Password from './pages/Form/ForgotPassword'
 import FormLayout from './pages/Form/FormLayout'
+<<<<<<< HEAD
+=======
+import ReportForms from './components/reports.components/ReportsForms'
+>>>>>>> main
 
 function App() {
   return (
@@ -16,6 +20,10 @@ function App() {
           <Route element={<LoggedInLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/survey" element={<ProjectsList projects={MockProjectData} />} />
+<<<<<<< HEAD
+=======
+            <Route path="/Reportforms" element={<ReportForms/>} />
+>>>>>>> main
           </Route>
           <Route element={<FormLayout />}>
             <Route path="/validation/login" element={<Login />} />
