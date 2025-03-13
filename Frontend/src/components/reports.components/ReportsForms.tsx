@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { getValueByDataKey } from "recharts/types/util/ChartUtils";
 import { Label } from "recharts";
+import "./components.css";
 
 
 type FormData = {
@@ -25,10 +26,12 @@ type FormData = {
   professional: string;
   nameWork: string;
   company: string;
-  dateHourStart: string;
-  dateHourEnd: string;
-  dateHourRestStart: string;
-  dateHourRestEnd: "",
+  dateBegin: string;
+  hourBegin: string;
+  dateEnd: string;
+  hourEnd: string;
+  hourRestBegin: string;
+  hourRestEnd: string;
 };
 
 const REPORT_STATUS_CHOICES = [
@@ -106,10 +109,12 @@ const ReportForms = () => {
     professional: "",
     nameWork: "",
     company: "",
-    dateHourStart: "",
-    dateHourEnd: "",
-    dateHourRestStart: "",
-    dateHourRestEnd: "",
+    dateBegin: "",
+    hourBegin: "",
+    dateEnd: "",
+    hourEnd: "",
+    hourRestBegin: "",
+    hourRestEnd: "",
   });
 
   useEffect(() => {
@@ -147,35 +152,17 @@ const ReportForms = () => {
   return (
 
 
-    <div className="container mt-0 text-light bg-dark center rounded" style={{ maxWidth: "1500px"}}>
+    <div className="container mt-0 text-light bg-custom center rounded" style={{ maxWidth: "1500px"}}>
       <h1 className="text-center mb-4">Relatório de Campo</h1>
       <form onSubmit={handleSubmit}>
 
-      <div className="text-left mb-4" style={{ display: 'flex', justifyContent: 'space-between', padding: '20px', border: '1px #000' }}>
-        <div className="mb-3 text-left ml-1" style={{ flex: 1, margin: '0 10px', padding: '20px', border: '1px solid #000', textAlign: 'center' }}>
-          <div style={{ textAlign: "left" }}>Obra:</div>
-            <input type="text" name="nameWork" className="form-control" value={formData.nameWork} onChange={handleChange}></input>
-        </div>
-      <div className="mb-3 text-left ml-1" style={{ flex: 1, margin: '0 10px', padding: '20px', border: '1px solid #000', textAlign: 'center' }}>
-        <div style={{ textAlign: "left" }}>Data e Hora de chegada:</div>
-          <input type="datetime-local" name="dateHourBegin" className="form-control" value={formData.dateHourStart} onChange={handleChange}></input>
-      </div>
-      <div className="mb-3 text-left ml-1" style={{ flex: 1, margin: '0 10px', padding: '20px', border: '1px solid #000', textAlign: 'center' }}>
-        <div style={{ textAlign: "left" }}>Data e Hora de saída:</div>
-          <input type="datetime-local" name="dateHourEnd" className="form-control" value={formData.dateHourEnd} onChange={handleChange}></input>
-      </div>
-      <div className="mb-3 text-left ml-1" style={{ flex: 1, margin: '0 10px', padding: '20px', border: '1px solid #000', textAlign: 'center' }}>
-        <div style={{ textAlign: "left" }}>Data inicio descanso:</div>
-          <input type="time" name="dateHourFood" className="form-control" value={formData.dateHourRestStart} onChange={handleChange}></input>
-      </div>
-      <div className="mb-3 text-left ml-1" style={{ flex: 1, margin: '0 10px', padding: '20px', border: '1px solid #000', textAlign: 'center' }}>
-        <div style={{ textAlign: "left" }}>Data fim descanso:</div>
-          <input type="time" name="dateHourFood" className="form-control" value={formData.dateHourRestEnd} onChange={handleChange}></input>
-      </div>
-    </div>
 
-      <div className="text-left mb-4" style={{display: 'flex', justifyContent: 'space-between', padding: '20px', border: '1px #000'}}> 
-        <div className="mb-3 text-left ml-1" style={{ flex: 1, margin: '0 10px', padding: '20px', border: '1px solid #000', textAlign: 'center' }}>
+      <header className="text-left mb-4" style={{ display: 'flex', justifyContent: 'space-between', padding: '20px', border: '2px groove #000', borderRadius: "10px" }}>
+        <div className="mb-3 text-left ml-1" style={{ flex: 1, padding: '20px', textAlign: 'center', flexGrow: 1 }}>
+            <div style={{ textAlign: "left" }}>Obra:</div>
+              <input type="text" name="nameWork" className="form-control" value={formData.nameWork} onChange={handleChange}></input>
+        </div>
+        <div className="mb-3 text-left ml-1" style={{ flex: 1, padding: '20px', textAlign: 'center', flexGrow: 1 }}>
           <div style={{textAlign: "left"}}>Contratante:</div>
             <select className="form-select" name="company" value={formData.company} onChange={handleChange}>
             <option value=""></option>
@@ -184,12 +171,37 @@ const ReportForms = () => {
             ))}
             </select>
         </div>
-        <div className="mb-3 text-left ml-1" style={{ flex: 1, margin: '0 10px', padding: '20px', border: '1px solid #000', textAlign: 'center' }}>
-          <div style={{textAlign: "left"}}>Responsável</div>
+        <div className="mb-3 text-left ml-1" style={{ flex: 1, padding: '20px', textAlign: 'center', flexGrow: 1 }}>
+          <div style={{textAlign: "left"}}>Responsável:</div>
             <input type="text" name="nameWork" className="form-control" value={formData.nameWork} onChange={handleChange}></input>
         </div>
+      </header>
+
+      <div className="text-left mb-4" style={{ display: 'flex', justifyContent: 'space-between', padding: '20px', border: '1px #000' , border: '2px groove #000', borderRadius: "10px"}}>
+        <div className="mb-3 text-left ml-1" style={{ flex: 1, padding: '20px', textAlign: 'center' }}>
+          <div style={{ textAlign: "left" }}>Data chegada:</div>
+            <input type="date" name="dateBegin" className="form-control" value={formData.dateBegin} onChange={handleChange}></input>
+          <div style={{ textAlign: "left" }}>Hora chegada:</div>
+            <input type="time" name="hourBegin" className="form-control" value={formData.hourBegin} onChange={handleChange}></input>  
+        </div>
+        <div className="mb-3 text-left ml-1" style={{ flex: 1, padding: '20px', textAlign: 'center' }}>
+          <div style={{ textAlign: "left" }}>Data saída:</div>
+            <input type="date" name="dateEnd" className="form-control" value={formData.dateEnd} onChange={handleChange}></input>
+          <div style={{ textAlign: "left" }}>Hora saída:</div>
+            <input type="time" name="hourEnd" className="form-control" value={formData.hourEnd} onChange={handleChange}></input>  
+        </div>
+        <div className="mb-3 text-left ml-1" style={{ flex: 1, padding: '20px', textAlign: 'center' }}>
+          <div style= {{ textAlign: "left" }}>Início horário de descanso:</div>
+            <input type="time" name="hourRestBegin" className="form-control" value={formData.hourRestBegin} onChange={handleChange}></input>
+          <div style= {{ textAlign: "left" }}>Fim horário de descanso:</div>
+            <input type="time" name="hourRestEnd" className="form-control" value={formData.hourRestEnd} onChange={handleChange}></input>
+        </div>
+      </div>  
+
+      <div>
+        <input type="file" name="file" className="file"></input>
       </div>
-      
+
       
       <div className="text-center mb-4" style={{display: 'flex', justifyContent: 'space-between', padding: '20px', border: '1px  #000' }}>
       <div className="mb-3 text-left ml-1" style={{ flex: 1, margin: '0 10px', padding: '20px', border: '1px solid #000', textAlign: 'center' }}>
