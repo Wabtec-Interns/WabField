@@ -22,11 +22,7 @@ const Navbar = () => {
     <div className="navbar p-2 flex justify-between">
       <Link to="/">
         <a className="outline flex outline-1 p-1 rounded-sm justify-between bg-black/40 w-fit">
-<<<<<<< HEAD
-            <h1 className="">
-=======
             <h1 className="text-white">
->>>>>>> main
               WabField
             </h1>
 

@@ -6,10 +6,6 @@ import tsConfigPaths from 'vite-tsconfig-paths'
 export default defineConfig({
   plugins: [react(), tsConfigPaths()],
   server: {
-<<<<<<< HEAD
-    host: '0.0.0.0',
-=======
-    allowedHosts: ['localhost', 'IP_ADDRESS', 'k4ubbvkq-6gqwmhk4-2nzaf6pafhd9.acb2-preview.marscode.dev'],
->>>>>>> main
+    allowedHosts: ['localhost', '10.242.128.163', 'k4ubbvkq-6gqwmhk4-2nzaf6pafhd9.acb2-preview.marscode.dev'],
   }
 })
