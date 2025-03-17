@@ -1,0 +1,10 @@
+.header-forms {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    border: 2px groove #000;
+    border-radius: 10px;
+    width: auto;
+    max-width: auto;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+}

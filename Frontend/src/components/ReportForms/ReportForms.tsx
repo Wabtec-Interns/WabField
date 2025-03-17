@@ -1,0 +1,210 @@
+import { useState, useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { getValueByDataKey } from "recharts/types/util/ChartUtils";
+import { Label } from "recharts";
+import "./ReportForms.css";  
+import HeaderForms from "./ReportComponents/HeaderForms";
+import ControlDateHour from "./ReportComponents/ControlDateHour";
+import ControlTurns from "./ReportComponents/ControlTurns";
+
+
+type FormData = {
+  status: string;
+  type: string;
+  morningType: string;
+  morningWeather: string;
+  morningWork: string;
+  afternoonType: string;
+  afternoonWeather: string;
+  afternoonWork: string;
+  nightType: string;
+  nightWeather: string;
+  nightWork: string;
+  weatherCondition: string;
+  workCondition: string;
+  typeContract: string;
+  directProfissional: string;
+  indirectProfissional: string;
+  outsourcedProfissional: string;
+  professional: string;
+  nameWork: string;
+  company: string;
+  dateBegin: string;
+  hourBegin: string;
+  dateEnd: string;
+  hourEnd: string;
+  hourRestBegin: string;
+  hourRestEnd: string;
+};
+
+const REPORT_STATUS_CHOICES = [
+  ["Open", "Aberto"],
+  ["Closed", "Fechado"],
+  ["In Progress", "Em Andamento"],
+];
+
+const TYPE_REPORT_CHOICES = [
+  ["Survey", "Visita"],
+  ["Project Monitoring", "Acompanhamento de Obra"],
+  ["Commissioning", "Comissionamento"],
+];
+
+const WEATHER_CONDITION_CHOICES = [
+  ["Sunny", "Ensolarado"],
+  ["Cloudy", "Nublado"],
+  ["Rainy", "Chuvoso"],
+  ["Foggy", "Nebuloso"],
+  ["Stormy", "Tempestuoso"],
+];
+
+const WORK_CONDITION_CHOICES = [
+  ["Practicable", "Praticável"],
+  ["Partially Practicable", "Parcialmente Praticável"],
+  ["Unpracticable", "Impraticável"],
+];
+
+const TYPE_CONTRACT_CHOICES = [
+  ["Indirect", "Indireto"],
+  ["Direct", "Direto"],
+  ["Outsourced", "Terceirizado"]
+];
+
+const DIRECT_PROFISSIONAL_CHOICES = [
+  ["Mechanical", "Mecanico direto"],
+  ["Mechanical2", "Mecanico direto 2"],
+];
+
+const INDIRECT_PROFISSIONAL_CHOICES = [
+  ["Mechanical", "Mecanico indireto "],
+  ["Mechanical2", "Mecanico indireto 2"],
+];
+
+const OUTSOURCED_PROFISSIONAL_CHOICES = [
+  ["Mechanical", "Mecanico terceirizado"],
+  ["Mechanical2", "Mecanico terceirizado 2"],
+];
+
+const COMPANY_CHOICES = [
+  ["Company 1", "Empresa 1"],
+  ["Company 2", "Empresa 2"],
+];
+
+
+const ReportForms = () => {
+  const [formData, setFormData] = useState<FormData>({
+    status: "",
+    type: "",
+    morningType: "",
+    morningWeather: "",
+    morningWork: "",
+    afternoonType: "",
+    afternoonWeather: "",
+    afternoonWork: "",
+    nightType: "",
+    nightWeather: "",
+    nightWork: "",
+    weatherCondition: "",
+    workCondition: "",
+    typeContract: "",
+    directProfissional: "",
+    indirectProfissional: "",
+    outsourcedProfissional: "",
+    professional: "",
+    nameWork: "",
+    company: "",
+    dateBegin: "",
+    hourBegin: "",
+    dateEnd: "",
+    hourEnd: "",
+    hourRestBegin: "",
+    hourRestEnd: "",
+  });
+
+  useEffect(() => {
+    console.log("Fetching dropdown options...");
+  }, []);
+
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const getProfessionalChoices = () => {
+    switch (formData.typeContract) {
+      case "Direct":
+        return DIRECT_PROFISSIONAL_CHOICES;
+      case "Outsourced": 
+        return OUTSOURCED_PROFISSIONAL_CHOICES;
+      case "Indirect":
+        return INDIRECT_PROFISSIONAL_CHOICES;
+      default:
+        return [];
+    }
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    //Aqui vai ficar a conexão com a api, teoricamente está pronto a conexão e vou chamar a api
+    //passando informações daqui para a api, na teoria vou chamar o obj
+    //chamado "formData", formData.NomeDoCampo e isso joga os dados no back
+    console.log("Apertei o botão e funcionou", formData);
+    alert('Relatório enviado');
+  };
+
+  return (
+
+
+    <div className="container mt-0 text-light bg-custom center rounded" style={{ maxWidth: "1500px"}}>
+      <h1 className="text-center mb-4">Relatório de Campo</h1>
+      <form onSubmit={handleSubmit}>
+        
+      <HeaderForms formData={formData} handleChange={handleChange} COMPANY_CHOICES={COMPANY_CHOICES} />
+      <ControlDateHour formData={formData} handleChange={handleChange} />
+      <ControlTurns formData={formData} handleChange={handleChange} TYPE_REPORT_CHOICES={TYPE_REPORT_CHOICES} WEATHER_CONDITION_CHOICES={WEATHER_CONDITION_CHOICES} WORK_CONDITION_CHOICES={WORK_CONDITION_CHOICES} />
+
+
+
+      <div style={{ maxWidth: "1500px", margin: '0 10px', padding: '20px', border: '1px solid #ffffff' }}>
+        <div className="text-center mb-4" style={{ maxWidth: "1500px", border: '1px solid #000'}}>DIV para soltar os cards</div>
+        <div className="text-center mb-4" style={{ maxWidth: "1500px", border: '1px solid #000'}}>DIV cards drag drop</div>
+      </div>
+
+      <div className="text-center mb-4" style={{display: 'flex', justifyContent: 'space-between', padding: '20px', border: '1px  #000', maxWidth: "1500px", margin: '0 10px'}}>
+        <div className="mb-3 text-left ml-1" style={{ flex: 1, margin: '0 10px', padding: '20px', border: '1px solid #000', textAlign: 'center' }}>
+          <div>Tipo de contrato:</div>
+            <select className="form-select" name="typeContract" value={formData.typeContract} onChange={handleChange}>
+              <label className="form-label"></label>
+                <option value=""></option>
+                {TYPE_CONTRACT_CHOICES.map(([value, label]) => (
+                <option key={value} value={value}>{label}</option>
+                ))}
+            </select>
+
+        {formData.typeContract && (
+        <div className="mb-3 text-left ml-1" style={{ flex: 1, margin: '0 10px', padding: '20px', border: '1px solid #000', textAlign: 'center' }}>
+          <div>Profissão:</div>
+          <select className="form-select" name="professional" value={formData.professional} onChange={handleChange} required>
+            <option value=""></option>
+            {getProfessionalChoices().map(([value, label]) => (
+              <option key={value} value={value}>{label}</option>
+            ))}
+          </select>
+        </div>
+      )}
+
+      </div>
+    </div>
+  
+
+      <button type="submit" className="btn btn-primary w-100 mt-3">
+          Enviar
+        </button>
+      </form>
+    </div>
+    
+  );
+};
+
+//colocar a regra para tornar 1 das 3 div sobre turno obrigatórios* melhoria 1 
+export default ReportForms;

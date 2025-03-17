@@ -1,0 +1,21 @@
+.control-turns {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    border: 2px groove #000;
+    border-radius: 10px;
+    width: auto;
+    max-width: auto;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+.control-turns > div {
+    flex: 1;
+    margin: 0 10px;
+    padding: 20px;
+    text-align: center;
+}
+
+.control-turns .form-select {
+    margin-bottom: 10px;
+}
