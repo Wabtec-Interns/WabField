@@ -1,4 +1,4 @@
-.control-turns {
+.type-contract {
     display: flex;
     justify-content: space-between;
     padding: 20px;
@@ -9,13 +9,13 @@
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
 }
 
-.control-turns > div {
+.type-contract > div {
     flex: 1;
     margin: 0 10px;
     padding: 20px;
     text-align: center;
 }
 
-.control-turns .form-select {
-    margin-bottom: 10px;
+.type--contract {
+    padding: 20px;
 }

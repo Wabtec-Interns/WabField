@@ -20,7 +20,7 @@ function HeaderForms({ formData, handleChange, COMPANY_CHOICES }) {
                 </div>
                 <div className="mb-3 text-left ml-1" style={{ flex: 1, padding: '20px', textAlign: 'center', flexGrow: 1 }}>
                     <div style={{textAlign: "left"}}>Responsável:</div>
-                    <input type="text" name="nameWork" className="form-control" value={formData.nameWork} onChange={handleChange}></input>
+                    <input type="text" name="responsable" className="form-control" value={formData.nameWork} onChange={handleChange}></input>
                 </div>
             </header>
         </form>

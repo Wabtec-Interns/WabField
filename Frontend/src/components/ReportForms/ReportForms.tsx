@@ -6,7 +6,8 @@ import "./ReportForms.css";
 import HeaderForms from "./ReportComponents/HeaderForms";
 import ControlDateHour from "./ReportComponents/ControlDateHour";
 import ControlTurns from "./ReportComponents/ControlTurns";
-
+import TypeContract from "./ReportComponents/TypeContract"; 
+import H1 from "./ReportComponents/H1";
 
 type FormData = {
   status: string;
@@ -28,6 +29,7 @@ type FormData = {
   outsourcedProfissional: string;
   professional: string;
   nameWork: string;
+  responsable: string;
   company: string;
   dateBegin: string;
   hourBegin: string;
@@ -64,24 +66,35 @@ const WORK_CONDITION_CHOICES = [
 ];
 
 const TYPE_CONTRACT_CHOICES = [
-  ["Indirect", "Indireto"],
   ["Direct", "Direto"],
+  ["Indirect", "Indireto"],
   ["Outsourced", "Terceirizado"]
 ];
 
 const DIRECT_PROFISSIONAL_CHOICES = [
-  ["Mechanical", "Mecanico direto"],
-  ["Mechanical2", "Mecanico direto 2"],
+  ["Helper", "Ajudante"],
+  ["Plumber", "Bombeiro Hidráulico"],
+  ["Electrician", "Eletricista"],
+  ["Plasterer", "Gesseiro"],
+  ["Installer", "Instalador"],
+  ["Half-Official", "Meio Oficial"],
+  ["Master Build", "Mestre de Obra"],
+  ["Mason", "Pedreiro"],
+  ["Painter", "Pintor"],
+  ["Servant", "Servente"],
+
 ];
 
 const INDIRECT_PROFISSIONAL_CHOICES = [
-  ["Mechanical", "Mecanico indireto "],
-  ["Mechanical2", "Mecanico indireto 2"],
+  ["Engineer", "Engenheiro"],
+  ["Engineer / TST", "Engenheiro / TST"],
+  ["Intern", "Estagiário"],
+  ["Technical of Work Security", "Técnica(o) de Segurança do Trabalho"],
+  ["Technical of Building", "Técnico em edificações"],
 ];
 
 const OUTSOURCED_PROFISSIONAL_CHOICES = [
-  ["Mechanical", "Mecanico terceirizado"],
-  ["Mechanical2", "Mecanico terceirizado 2"],
+  [" ", " "],
 ];
 
 const COMPANY_CHOICES = [
@@ -111,6 +124,7 @@ const ReportForms = () => {
     outsourcedProfissional: "",
     professional: "",
     nameWork: "",
+    responsable: "",
     company: "",
     dateBegin: "",
     hourBegin: "",
@@ -156,45 +170,15 @@ const ReportForms = () => {
 
 
     <div className="container mt-0 text-light bg-custom center rounded" style={{ maxWidth: "1500px"}}>
-      <h1 className="text-center mb-4">Relatório de Campo</h1>
+
+      <H1 formData={formData} handleChange={handleChange} REPORT_STATUS_CHOICES={REPORT_STATUS_CHOICES}/>
+      
       <form onSubmit={handleSubmit}>
         
       <HeaderForms formData={formData} handleChange={handleChange} COMPANY_CHOICES={COMPANY_CHOICES} />
       <ControlDateHour formData={formData} handleChange={handleChange} />
       <ControlTurns formData={formData} handleChange={handleChange} TYPE_REPORT_CHOICES={TYPE_REPORT_CHOICES} WEATHER_CONDITION_CHOICES={WEATHER_CONDITION_CHOICES} WORK_CONDITION_CHOICES={WORK_CONDITION_CHOICES} />
-
-
-
-      <div style={{ maxWidth: "1500px", margin: '0 10px', padding: '20px', border: '1px solid #ffffff' }}>
-        <div className="text-center mb-4" style={{ maxWidth: "1500px", border: '1px solid #000'}}>DIV para soltar os cards</div>
-        <div className="text-center mb-4" style={{ maxWidth: "1500px", border: '1px solid #000'}}>DIV cards drag drop</div>
-      </div>
-
-      <div className="text-center mb-4" style={{display: 'flex', justifyContent: 'space-between', padding: '20px', border: '1px  #000', maxWidth: "1500px", margin: '0 10px'}}>
-        <div className="mb-3 text-left ml-1" style={{ flex: 1, margin: '0 10px', padding: '20px', border: '1px solid #000', textAlign: 'center' }}>
-          <div>Tipo de contrato:</div>
-            <select className="form-select" name="typeContract" value={formData.typeContract} onChange={handleChange}>
-              <label className="form-label"></label>
-                <option value=""></option>
-                {TYPE_CONTRACT_CHOICES.map(([value, label]) => (
-                <option key={value} value={value}>{label}</option>
-                ))}
-            </select>
-
-        {formData.typeContract && (
-        <div className="mb-3 text-left ml-1" style={{ flex: 1, margin: '0 10px', padding: '20px', border: '1px solid #000', textAlign: 'center' }}>
-          <div>Profissão:</div>
-          <select className="form-select" name="professional" value={formData.professional} onChange={handleChange} required>
-            <option value=""></option>
-            {getProfessionalChoices().map(([value, label]) => (
-              <option key={value} value={value}>{label}</option>
-            ))}
-          </select>
-        </div>
-      )}
-
-      </div>
-    </div>
+      <TypeContract formData={formData} handleChange={handleChange} TYPE_CONTRACT_CHOICES={TYPE_CONTRACT_CHOICES} getProfessionalChoices={getProfessionalChoices}/>
   
 
       <button type="submit" className="btn btn-primary w-100 mt-3">
