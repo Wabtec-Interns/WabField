@@ -8,6 +8,7 @@ import ControlDateHour from "./ReportComponents/ControlDateHour";
 import ControlTurns from "./ReportComponents/ControlTurns";
 import TypeContract from "./ReportComponents/TypeContract"; 
 import H1 from "./ReportComponents/H1";
+import InputMask from 'react-input-mask'; 
 
 type FormData = {
   status: string;
@@ -172,7 +173,7 @@ const ReportForms = () => {
     <div className="container mt-0 text-light bg-custom center rounded" style={{ maxWidth: "1500px"}}>
 
       <H1 formData={formData} handleChange={handleChange} REPORT_STATUS_CHOICES={REPORT_STATUS_CHOICES}/>
-      
+
       <form onSubmit={handleSubmit}>
         
       <HeaderForms formData={formData} handleChange={handleChange} COMPANY_CHOICES={COMPANY_CHOICES} />
