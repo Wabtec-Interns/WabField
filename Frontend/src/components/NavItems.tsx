@@ -24,6 +24,16 @@ const routes = [
           sublabel: "Cadastro dos projetos que devem ser feitos para armazenar os relatórios de campo",
           link: "/survey/create",
         },
+        {
+          label: "Relatórios de Campo",
+          sublabel: "Relatórios de campo dos projetos cadastrados",
+          link: "/survey/projectReports",
+        },
+        {
+          label: "Criar Relatórios",
+          sublabel: "Crie os relatórios de campo dos projetos cadastrados",
+          link: "/survey/projectReports/create",
+        }
       ]
     },
     {

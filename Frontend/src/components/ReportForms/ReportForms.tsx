@@ -9,8 +9,10 @@ import ControlTurns from "./ReportComponents/ControlTurns";
 import TypeContract from "./ReportComponents/TypeContract"; 
 import H1 from "./ReportComponents/H1";
 import InputMask from 'react-input-mask'; 
+import { useNavigate } from "react-router";
 
 type FormData = {
+  id: number;
   status: string;
   type: string;
   morningType: string;
@@ -106,6 +108,7 @@ const COMPANY_CHOICES = [
 
 const ReportForms = () => {
   const [formData, setFormData] = useState<FormData>({
+    id: 0,
     status: "",
     type: "",
     morningType: "",
@@ -144,6 +147,8 @@ const ReportForms = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const navigate = useNavigate();
+
   const getProfessionalChoices = () => {
     switch (formData.typeContract) {
       case "Direct":
@@ -162,9 +167,10 @@ const ReportForms = () => {
 
     //Aqui vai ficar a conexão com a api, teoricamente está pronto a conexão e vou chamar a api
     //passando informações daqui para a api, na teoria vou chamar o obj
-    //chamado "formData", formData.NomeDoCampo e isso joga os dados no back
+    //chamado "", formData.NomeDoCampo e isso joga os dados no back
     console.log("Apertei o botão e funcionou", formData);
     alert('Relatório enviado');
+    navigate(`/survey/projectReports/${formData.id}`, {state: {formData}});
   };
 
   return (
