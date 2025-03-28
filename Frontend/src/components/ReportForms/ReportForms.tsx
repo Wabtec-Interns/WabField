@@ -170,6 +170,7 @@ const ReportForms = () => {
     //chamado "", formData.NomeDoCampo e isso joga os dados no back
     console.log("Apertei o botão e funcionou", formData);
     alert('Relatório enviado');
+    localStorage.setItem("reportData", JSON.stringify(formData));
     navigate(`/survey/projectReports/${formData.id}`, {state: {formData}});
   };
 
