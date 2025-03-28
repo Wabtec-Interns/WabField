@@ -7,15 +7,21 @@
     width: auto;
     max-width: auto;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
-}
-
-.type-contract > div {
+  }
+  
+  .type-contract > div {
     flex: 1;
     margin: 0 10px;
     padding: 20px;
     text-align: center;
-}
-
-.type--contract {
+  }
+  
+  .type--contract {
     padding: 20px;
-}
+  }
+  
+  .font-size {
+    font-size: 18px;
+    font-weight: bold;
+    padding-bottom: 15px;
+  }

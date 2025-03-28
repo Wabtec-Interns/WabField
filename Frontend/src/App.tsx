@@ -21,7 +21,7 @@ function App() {
             <Route path="/survey" element={<ProjectsList projects={MockProjectData} />} />
             <Route path="survey/projectReports" element={<ReportList />} />
             <Route path="survey/projectReports/:id" element={<ReportDetailedView />} />
-            <Route path="survey/projectReports/create" element={<ReportForms/>} />
+            <Route path="/ReportForms" element={<ReportForms/>} />
 
           </Route>
           <Route element={<FormLayout />}>
