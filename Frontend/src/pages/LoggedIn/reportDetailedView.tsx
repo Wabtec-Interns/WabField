@@ -1,45 +1,43 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom';
 
-// Supondo que os dados cheguem por props ou contexto, aqui é um exemplo:
 interface ReportData {
-    status: string;
-    type: string;
-    morningType: string;
-    morningWeather: string;
-    morningWork: string;
-    afternoonType: string;
-    afternoonWeather: string;
-    afternoonWork: string;
-    nightType: string;
-    nightWeather: string;
-    nightWork: string;
-    weatherCondition: string;
-    workCondition: string;
-    typeContract: string;
-    directProfissional: string;
-    indirectProfissional: string;
-    outsourcedProfissional: string;
-    professional: string;
-    nameWork: string;
-    responsable: string;
-    company: string;
-    dateBegin: string;
-    hourBegin: string;
-    dateEnd: string;
-    hourEnd: string;
-    hourRestBegin: string;
-    hourRestEnd: string;
-  // Adicione outros campos necessários...
+  id: number;
+  status: string;
+  type: string;
+  morningType: string;
+  morningWeather: string;
+  morningWork: string;
+  afternoonType: string;
+  afternoonWeather: string;
+  afternoonWork: string;
+  nightType: string;
+  nightWeather: string;
+  nightWork: string;
+  weatherCondition: string;
+  workCondition: string;
+  typeContract: string;
+  directProfissional: string;
+  indirectProfissional: string;
+  outsourcedProfissional: string;
+  professional: string;
+  nameWork: string;
+  responsable: string;
+  company: string;
+  dateBegin: string;
+  hourBegin: string;
+  dateEnd: string;
+  hourEnd: string;
+  hourRestBegin: string;
+  hourRestEnd: string;
 }
 
 const ReportDetailedView: React.FC = () => {
-    const {state} = useLocation();
-    const data = state as ReportData;
+  const data = JSON.parse(localStorage.getItem('reportData') || '{}') as ReportData;
+
   return (
     <div className="min-h-screen p-4">
-      {/* Header */}
-      <header className="bg-blue-600 text-white p-4 mb-4 rounded">
+      <header className="bg-red-600 text-white p-4 mb-4 rounded">
         <h1 className="text-xl font-bold">Relatório Detalhado</h1>
         <p className="text-sm">Wabtec Corporation</p>
         <div className="mt-2">
@@ -49,14 +47,58 @@ const ReportDetailedView: React.FC = () => {
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="bg-white p-4 rounded shadow">
-        <h2 className="text-lg font-semibold mb-2">Condição de Tempo (por período)</h2>
-        <p>{data.weatherCondition}</p>
-        {/* Adicione aqui outros campos e seções conforme necessário */}
+      <main className="bg-white p-4 rounded shadow space-y-6">
+        <h2 className="text-lg font-semibold mb-2">Informações Gerais</h2>
+
+        {/* Bloco para datas e horas */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="border border-gray-200 rounded p-3">
+            <h3 className="font-semibold">Data Início</h3>
+            <p>Data: {data.dateBegin}</p>
+            <p>Hora: {data.hourBegin}</p>
+          </div>
+
+          <div className="border border-gray-200 rounded p-3">
+            <h3 className="font-semibold">Data Fim</h3>
+            <p>Data: {data.dateEnd}</p>
+            <p>Hora: {data.hourEnd}</p>
+          </div>
+        </div>
+
+        {/* Bloco para intervalo */}
+        <div className="border border-gray-200 rounded p-3">
+          <h3 className="font-semibold">Intervalo</h3>
+          <p>{data.hourRestBegin} - {data.hourRestEnd}</p>
+        </div>
+
+        {/* Períodos */}
+        <div className="border border-gray-200 rounded p-3">
+          <h2 className="text-lg font-semibold">Períodos</h2>
+          <p>Manhã: Tipo: {data.morningType}, Tempo: {data.morningWeather}, Trabalho: {data.morningWork}</p>
+          <p>Tarde: Tipo: {data.afternoonType}, Tempo: {data.afternoonWeather}, Trabalho: {data.afternoonWork}</p>
+          <p>Noite: Tipo: {data.nightType}, Tempo: {data.nightWeather}, Trabalho: {data.nightWork}</p>
+        </div>
+
+        {/* Contratação e Profissional */}
+        <div className="border border-gray-200 rounded p-3">
+          <h2 className="text-lg font-semibold">Contratação e Profissional</h2>
+          <p>Tipo de Contrato: {data.typeContract}</p>
+          <p>Profissional Direto: {data.directProfissional}</p>
+          <p>Profissional Indireto: {data.indirectProfissional}</p>
+          <p>Profissional Terceirizado: {data.outsourcedProfissional}</p>
+          <p>Profissional: {data.professional}</p>
+        </div>
+
+        {/* Obra e Responsável */}
+        <div className="border border-gray-200 rounded p-3">
+          <h2 className="text-lg font-semibold">Obra e Responsável</h2>
+          <p>Nome da Obra: {data.nameWork}</p>
+          <p>Responsável: {data.responsable}</p>
+          <p>Empresa: {data.company}</p>
+        </div>
       </main>
     </div>
-  )
-}
+  );
+};
 
-export default ReportDetailedView
+export default ReportDetailedView;
