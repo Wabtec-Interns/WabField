@@ -8,3 +8,59 @@
     max-width: auto;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
 }
+
+.add-button {
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+    background-color: teal;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+}
+
+.add-button:hover {
+    background-color: darkcyan;
+}
+
+.overlay {
+    background-color: rgba(0, 0, 0, 0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal {
+    position: relative;
+    background: #f0f0f0; 
+    padding: 20px;
+    border-radius: 10px;
+    outline: none;
+    width: 50%;
+    max-width: 600px;
+    margin: auto;
+}
+
+.modal-content {
+    color: black; 
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.btn {
+    margin-right: 10px;
+}

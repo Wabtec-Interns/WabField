@@ -13,6 +13,7 @@ import FileUploadForm from "./ReportComponents/FileUploadForm";
 import InputMask from 'react-input-mask'; 
 import { useNavigate } from "react-router";
 
+
 type FormData = {
   id: number;
   status: string;
@@ -107,6 +108,12 @@ const COMPANY_CHOICES = [
   ["Company 2", "Empresa 2"],
 ];
 
+const RESPONSABLE_CHOICES = [
+  ["Acauã Ferreira", "Acauã Ferreira"],
+  ["Ana Amélia", "Ana Amélia"],
+  ["External", "Externo"],
+];
+
 
 const ReportForms = () => {
   const [formData, setFormData] = useState<FormData>({
@@ -151,11 +158,11 @@ const ReportForms = () => {
 
   const navigate = useNavigate();
 
-  const getProfessionalChoices = () => {
-    switch (formData.typeContract) {
+  const getProfessionalChoices = (typeContract) => {
+    switch (typeContract) {
       case "Direct":
         return DIRECT_PROFISSIONAL_CHOICES;
-      case "Outsourced": 
+      case "Outsourced":
         return OUTSOURCED_PROFISSIONAL_CHOICES;
       case "Indirect":
         return INDIRECT_PROFISSIONAL_CHOICES;
@@ -182,7 +189,7 @@ const ReportForms = () => {
     <div className="container mt-0 text-light bg-custom center rounded" style={{ maxWidth: "1500px"}}>
       <H1 formData={formData} handleChange={handleChange} REPORT_STATUS_CHOICES={REPORT_STATUS_CHOICES}/>
       <form onSubmit={handleSubmit}>
-      <HeaderForms formData={formData} handleChange={handleChange} COMPANY_CHOICES={COMPANY_CHOICES} />
+      <HeaderForms formData={formData} handleChange={handleChange} COMPANY_CHOICES={COMPANY_CHOICES} RESPONSABLE_CHOICES={RESPONSABLE_CHOICES} />
       <ControlDateHour formData={formData} handleChange={handleChange} />
       <ControlTurns formData={formData} handleChange={handleChange} TYPE_REPORT_CHOICES={TYPE_REPORT_CHOICES} WEATHER_CONDITION_CHOICES={WEATHER_CONDITION_CHOICES} WORK_CONDITION_CHOICES={WORK_CONDITION_CHOICES} />
       <TypeContract formData={formData} handleChange={handleChange} TYPE_CONTRACT_CHOICES={TYPE_CONTRACT_CHOICES} getProfessionalChoices={getProfessionalChoices}/> 
