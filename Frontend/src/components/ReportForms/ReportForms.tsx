@@ -7,7 +7,7 @@ import "./ReportForms.css";
 import HeaderForms from "./ReportComponents/HeaderForms";
 import ControlDateHour from "./ReportComponents/ControlDateHour";
 import ControlTurns from "./ReportComponents/ControlTurns";
-import TypeContract from "./ReportComponents/TypeContract"; 
+import TypeContract from "./ReportComponents/TypeContract";
 import H1 from "./ReportComponents/H1";
 import FileUploadForm from "./ReportComponents/FileUploadForm";
 import InputMask from 'react-input-mask'; 

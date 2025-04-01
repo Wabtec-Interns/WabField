@@ -8,7 +8,17 @@ export default tseslint.config(
   { ignores: ['dist'] },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
-    files: ['**/*.{ts,tsx}'],
+    files: ['**/*.{ts,tsx, js,jsx}'],
+    languageOptions: {
+      parser: tseslint.parsers['typescript-eslint'],
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+        ecmaVersion: 2020,
+        sourceType: 'module',
+      },
+    },
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
