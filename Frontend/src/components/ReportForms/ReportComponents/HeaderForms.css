@@ -9,6 +9,25 @@
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
 }
 
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+    padding: 20px;
+    flex: 1;
+    flex-grow: 1;
+}
+
+.form-group label {
+    text-align: left;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
 .add-button {
     width: 40px;
     height: 40px;
@@ -37,7 +56,7 @@
 
 .modal {
     position: relative;
-    background: #f0f0f0; 
+    background: black; 
     padding: 20px;
     border-radius: 10px;
     outline: none;
@@ -50,15 +69,15 @@
     color: black; 
 }
 
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-control {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid black;
-    border-radius: 5px;
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: white;
 }
 
 .btn {

@@ -1,4 +1,8 @@
 .bg-custom {
   background-color: #4f4b495e;
   width: 100%;
+  max-width: 1500px; 
+  margin-top: 0; 
+  color: #fff; 
+  border-radius: 0.25rem; 
 }

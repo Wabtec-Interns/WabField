@@ -14,6 +14,7 @@ import InputMask from 'react-input-mask';
 import { useNavigate } from "react-router";
 
 
+
 type FormData = {
   id: number;
   status: string;
@@ -177,30 +178,23 @@ const ReportForms = () => {
     //Aqui vai ficar a conexão com a api, teoricamente está pronto a conexão e vou chamar a api
     //passando informações daqui para a api, na teoria vou chamar o obj
     //chamado "", formData.NomeDoCampo e isso joga os dados no back
-    console.log("Apertei o botão e funcionou", formData);
     alert('Relatório enviado');
     localStorage.setItem("reportData", JSON.stringify(formData));
     navigate(`/survey/projectReports/${formData.id}`, {state: {formData}});
   };
 
   return (
-
-
-    <div className="container mt-0 text-light bg-custom center rounded" style={{ maxWidth: "1500px"}}>
-      <H1 formData={formData} handleChange={handleChange} REPORT_STATUS_CHOICES={REPORT_STATUS_CHOICES}/>
+    <div className="container bg-custom center">
+      <H1 formData={formData} handleChange={handleChange} REPORT_STATUS_CHOICES={REPORT_STATUS_CHOICES} />
       <form onSubmit={handleSubmit}>
-      <HeaderForms formData={formData} handleChange={handleChange} COMPANY_CHOICES={COMPANY_CHOICES} RESPONSABLE_CHOICES={RESPONSABLE_CHOICES} />
-      <ControlDateHour formData={formData} handleChange={handleChange} />
-      <ControlTurns formData={formData} handleChange={handleChange} TYPE_REPORT_CHOICES={TYPE_REPORT_CHOICES} WEATHER_CONDITION_CHOICES={WEATHER_CONDITION_CHOICES} WORK_CONDITION_CHOICES={WORK_CONDITION_CHOICES} />
-      <TypeContract formData={formData} handleChange={handleChange} TYPE_CONTRACT_CHOICES={TYPE_CONTRACT_CHOICES} getProfessionalChoices={getProfessionalChoices}/> 
-      <FileUploadForm />
-
-      <button type="submit" className="btn btn-primary w-100 mt-3">
-          Enviar
-        </button>
+        <HeaderForms formData={formData} handleChange={handleChange} COMPANY_CHOICES={COMPANY_CHOICES} RESPONSABLE_CHOICES={RESPONSABLE_CHOICES} />
+        <ControlDateHour formData={formData} handleChange={handleChange} />
+        <ControlTurns formData={formData} handleChange={handleChange} TYPE_REPORT_CHOICES={TYPE_REPORT_CHOICES} WEATHER_CONDITION_CHOICES={WEATHER_CONDITION_CHOICES} WORK_CONDITION_CHOICES={WORK_CONDITION_CHOICES} />
+        <TypeContract formData={formData} handleChange={handleChange} TYPE_CONTRACT_CHOICES={TYPE_CONTRACT_CHOICES} getProfessionalChoices={getProfessionalChoices} />
+        <FileUploadForm />
+        <button type="submit" className="btn btn-primary w-100 mt-3">Enviar</button>
       </form>
     </div>
-    
   );
 };
 

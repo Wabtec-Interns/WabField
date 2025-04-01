@@ -2,19 +2,23 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import './HeaderForms.css';
 
-Modal.setAppElement('#root'); // Necessário para acessibilidade
+Modal.setAppElement('#root');
 
 function HeaderForms({ formData, handleChange, COMPANY_CHOICES, RESPONSABLE_CHOICES }) {
     const [modalIsOpen, setModalIsOpen] = useState(false);
-    const [newWork, setNewWork] = useState({ name: "", location: "", deadline: "", contractor: "" });
+    const [newWork, setNewWork] = useState({ name: "", location: "", contractNumber: "" });
     const [works, setWorks] = useState([]);
 
     const openModal = () => {
+        console.log("Opening modal"); // Verificação
         setModalIsOpen(true);
+        console.log("Modal isOpen:", modalIsOpen); // Verificação
     };
 
     const closeModal = () => {
+        console.log("Closing modal"); // Verificação
         setModalIsOpen(false);
+        console.log("Modal isOpen:", modalIsOpen); // Verificação
     };
 
     const handleNewWorkChange = (e) => {
@@ -24,17 +28,17 @@ function HeaderForms({ formData, handleChange, COMPANY_CHOICES, RESPONSABLE_CHOI
 
     const handleAddWork = () => {
         setWorks([...works, newWork.name]);
-        setNewWork({ name: "", location: "", deadline: "", contractor: "" });
+        setNewWork({ name: "", location: "", contractNumber: "" });
         closeModal();
     };
 
     return (
         <div className="page-main">
             <header className="header-forms">
-                <div className="mb-3 text-left ml-1" style={{ flex: 1, padding: '20px', textAlign: 'center', flexGrow: 1 }}>
-                    <div style={{ textAlign: "left" }}>Obra:</div>
+                <div className="form-group">
+                    <label>Obra:</label>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <select className="form-select" name="nameWork" value={formData.nameWork} onChange={handleChange}>
+                        <select className="form-control" name="nameWork" value={formData.nameWork} onChange={handleChange}>
                             <option value=""></option>
                             {works.map((work, index) => (
                                 <option key={index} value={work}>{work}</option>
@@ -43,18 +47,18 @@ function HeaderForms({ formData, handleChange, COMPANY_CHOICES, RESPONSABLE_CHOI
                         <button type="button" className="add-button" onClick={openModal}>+</button>
                     </div>
                 </div>
-                <div className="mb-3 text-left ml-1" style={{ flex: 1, padding: '20px', textAlign: 'center', flexGrow: 1 }}>
-                    <div style={{textAlign: "left"}}>Contratante:</div>
-                    <select className="form-select" name="company" value={formData.company} onChange={handleChange}>
+                <div className="form-group">
+                    <label>Contratante:</label>
+                    <select className="form-control" name="company" value={formData.company} onChange={handleChange}>
                         <option value=""></option>
                         {COMPANY_CHOICES.map(([value, label]) => (
                             <option key={value} value={value}>{label}</option>
                         ))}
                     </select>
                 </div>
-                <div className="mb-3 text-left ml-1" style={{ flex: 1, padding: '20px', textAlign: 'center', flexGrow: 1 }}>
-                    <div style={{textAlign: "left"}}>Responsável:</div>
-                    <select className="form-select" name="responsable" value={formData.responsable} onChange={handleChange}>
+                <div className="form-group">
+                    <label>Responsável:</label>
+                    <select className="form-control" name="responsable" value={formData.responsable} onChange={handleChange}>
                         <option value=""></option>
                         {RESPONSABLE_CHOICES.map(([value, label]) => (
                             <option key={value} value={value}>{label}</option>
@@ -63,8 +67,16 @@ function HeaderForms({ formData, handleChange, COMPANY_CHOICES, RESPONSABLE_CHOI
                 </div>
             </header>
 
-            <Modal isOpen={modalIsOpen} onRequestClose={closeModal} contentLabel="Cadastrar Nova Obra" className="modal" overlayClassName="overlay">
+            <Modal 
+                isOpen={modalIsOpen} 
+                onRequestClose={closeModal} 
+                contentLabel="Cadastrar Nova Obra" 
+                className="modal" 
+                overlayClassName="overlay"
+                shouldCloseOnEsc={true} 
+            >
                 <div className="modal-content">
+                    <button onClick={closeModal} className="close-button">X</button>
                     <h2>Cadastrar Nova Obra</h2>
                     <div className="form-group">
                         <label>Nome da obra:</label>
@@ -75,15 +87,10 @@ function HeaderForms({ formData, handleChange, COMPANY_CHOICES, RESPONSABLE_CHOI
                         <input type="text" name="location" value={newWork.location} onChange={handleNewWorkChange} className="form-control" />
                     </div>
                     <div className="form-group">
-                        <label>Prazo contratual:</label>
-                        <input type="text" name="deadline" value={newWork.deadline} onChange={handleNewWorkChange} className="form-control" />
-                    </div>
-                    <div className="form-group">
-                        <label>Nome da contratante:</label>
-                        <input type="text" name="contractor" value={newWork.contractor} onChange={handleNewWorkChange} className="form-control" />
+                        <label>Número do contrato:</label>
+                        <input type="text" name="contractNumber" value={newWork.contractNumber} onChange={handleNewWorkChange} className="form-control" />
                     </div>
                     <button onClick={handleAddWork} className="btn btn-primary">Adicionar</button>
-                    <button onClick={closeModal} className="btn btn-secondary">Fechar</button>
                 </div>
             </Modal>
         </div>
