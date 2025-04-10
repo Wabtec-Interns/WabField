@@ -273,6 +273,7 @@ const getActivitiesChoices = (activitiesType) => {
         <TypeContract formData={formData} handleChange={handleChange} TYPE_CONTRACT_CHOICES={TYPE_CONTRACT_CHOICES} getProfessionalChoices={getProfessionalChoices} />
         <ActivitiesChoice formData={formData} handleChange={handleChange} ACTIVITIES_CHOICES={ACTIVITIES_CHOICES} getActivitiesChoices={getActivitiesChoices} />
         <FileUploadForm />
+        <div>?</div>
         
         <button type="submit" className="btn btn-primary w-100 mt-3">Enviar</button>
       </form>
