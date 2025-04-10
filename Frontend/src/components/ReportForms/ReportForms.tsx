@@ -7,7 +7,7 @@ import "./ReportForms.css";
 import HeaderForms from "./ReportComponents/HeaderForms";
 import ControlDateHour from "./ReportComponents/ControlDateHour";
 import ControlTurns from "./ReportComponents/ControlTurns";
-import TypeContract from "./ReportComponents/TypeContract"; 
+import TypeContract from "./ReportComponents/TypeContract";
 import ActivitiesChoice from "./ReportComponents/ActivitiesChoice";
 import H1 from "./ReportComponents/H1";
 import FileUploadForm from "./ReportComponents/FileUploadForm";
@@ -270,10 +270,8 @@ const getActivitiesChoices = (activitiesType) => {
         <HeaderForms formData={formData} handleChange={handleChange} COMPANY_CHOICES={COMPANY_CHOICES} RESPONSABLE_CHOICES={RESPONSABLE_CHOICES} />
         <ControlDateHour formData={formData} handleChange={handleChange} />
         <ControlTurns formData={formData} handleChange={handleChange} TYPE_REPORT_CHOICES={TYPE_REPORT_CHOICES} WEATHER_CONDITION_CHOICES={WEATHER_CONDITION_CHOICES} WORK_CONDITION_CHOICES={WORK_CONDITION_CHOICES} />
-        <div className="lists">
-        <TypeContract className="list--" formData={formData} handleChange={handleChange} TYPE_CONTRACT_CHOICES={TYPE_CONTRACT_CHOICES} getProfessionalChoices={getProfessionalChoices} />
-        <ActivitiesChoice className="list--" formData={formData} handleChange={handleChange} ACTIVITIES_CHOICES={ACTIVITIES_CHOICES} getActivitiesChoices={getActivitiesChoices} />
-        </div>
+        <TypeContract formData={formData} handleChange={handleChange} TYPE_CONTRACT_CHOICES={TYPE_CONTRACT_CHOICES} getProfessionalChoices={getProfessionalChoices} />
+        <ActivitiesChoice formData={formData} handleChange={handleChange} ACTIVITIES_CHOICES={ACTIVITIES_CHOICES} getActivitiesChoices={getActivitiesChoices} />
         <FileUploadForm />
         
         <button type="submit" className="btn btn-primary w-100 mt-3">Enviar</button>

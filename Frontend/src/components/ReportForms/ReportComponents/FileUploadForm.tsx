@@ -1,3 +1,5 @@
+
+
 import React, { useState } from "react";
 import "./FileUploadForm.css"; // Certifique-se de criar e importar o arquivo CSS
 
@@ -12,13 +14,24 @@ function FileUploadForm() {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  interface FileListState {
+    image: File[];
+    video: File[];
+    file: File[];
+  }
+
+  interface FileUploadEvent extends React.ChangeEvent<HTMLInputElement> {
+    target: HTMLInputElement & { name: keyof FileListState; files: FileList | null };
+  }
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
 
     const formData = new FormData();
-    Object.keys(files).forEach(key => {
-      files[key].forEach(file => {
-        formData.append(key, file);
+    Object.keys(files).forEach((key) => {
+      const fileKey = key as keyof FileListState;
+      files[fileKey].forEach((file) => {
+        formData.append(fileKey, file);
       });
     });
 
