@@ -84,6 +84,7 @@ function ActivitiesChoice({ formData, handleChange, ACTIVITIES_CHOICES, getActiv
 
     return (
         <div className="text-center type-activities">
+            <button type="button" className="add-button" onClick={handleAddActivitie}>+</button>
             {activities.map((activitie, index) => (
                 <div key={index} className="text-left ml-1">
                     <div className="font-size">Tipo de atividade:</div>
@@ -120,15 +121,17 @@ function ActivitiesChoice({ formData, handleChange, ACTIVITIES_CHOICES, getActiv
                                         pattern="\d{1,3}"
                                         required
                                     />
-                                    <button type="button" className="remove-button" onClick={() => handleRemoveExecuted(index, executedIndex)}>X</button>
-                                </div>
+                                    {activitie.activitiesExecuted.length > 1 && (
+                                        <button type="button" className="remove-button" onClick={() => handleRemoveExecuted(index, executedIndex)}>X</button>
+                                    )}
+                                    </div>
+                                    
                             ))}
-                            <button type="button" className="add-button" onClick={() => handleAddExecuted(index)}>Adicionar Atividade</button>
+                            <button type="button" className="add-executed-button" onClick={() => handleAddExecuted(index)}>Adicionar Atividade</button>
                         </div>
                     )}
                 </div>
             ))}
-            <button type="button" className="add-button" onClick={handleAddActivitie}>+</button>
         </div>
     );
 }

@@ -20,12 +20,15 @@ function TypeContract({ formData, handleChange, TYPE_CONTRACT_CHOICES, getProfes
     };
 
     const handleRemoveContract = (index) => {
-        const newContracts = contracts.filter((_, i) => i !== index);
-        setContracts(newContracts);
+        if (contracts.length > 1) {
+            const newContracts = contracts.filter((_, i) => i !== index);
+            setContracts(newContracts);
+        }
     };
 
     return (
         <div className="text-center type-contract">
+            <button type="button" className="add-button" onClick={handleAddContract}>+</button>
             {contracts.map((contract, index) => (
                 <div key={index} className="text-left ml-1">
                     <div className="font-size">Tipo de contrato:</div>
@@ -36,7 +39,9 @@ function TypeContract({ formData, handleChange, TYPE_CONTRACT_CHOICES, getProfes
                                 <option key={value} value={value}>{label}</option>
                             ))}
                         </select>
-                        <button type="button" className="remove-button" onClick={() => handleRemoveContract(index)}>X</button>
+                        {contracts.length > 1 && (
+                            <button type="button" className="remove-button" onClick={() => handleRemoveContract(index)}>X</button>
+                        )}
                     </div>
 
                     {contract.typeContract && (
@@ -66,7 +71,6 @@ function TypeContract({ formData, handleChange, TYPE_CONTRACT_CHOICES, getProfes
                     )}
                 </div>
             ))}
-            <button type="button" className="add-button" onClick={handleAddContract}>+</button>
         </div>
     );
 }

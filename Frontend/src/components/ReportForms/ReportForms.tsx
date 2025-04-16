@@ -254,10 +254,6 @@ const getActivitiesChoices = (activitiesType) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    //Aqui vai ficar a conexão com a api, teoricamente está pronto a conexão e vou chamar a api
-    //passando informações daqui para a api, na teoria vou chamar o obj
-    //chamado "", formData.NomeDoCampo e isso joga os dados no back
     alert('Relatório enviado');
     localStorage.setItem("reportData", JSON.stringify(formData));
     navigate(`/survey/projectReports/${formData.id}`, {state: {formData}});
@@ -273,7 +269,6 @@ const getActivitiesChoices = (activitiesType) => {
         <TypeContract formData={formData} handleChange={handleChange} TYPE_CONTRACT_CHOICES={TYPE_CONTRACT_CHOICES} getProfessionalChoices={getProfessionalChoices} />
         <ActivitiesChoice formData={formData} handleChange={handleChange} ACTIVITIES_CHOICES={ACTIVITIES_CHOICES} getActivitiesChoices={getActivitiesChoices} />
         <FileUploadForm />
-        <div>?</div>
         
         <button type="submit" className="btn btn-primary w-100 mt-3">Enviar</button>
       </form>
@@ -281,5 +276,4 @@ const getActivitiesChoices = (activitiesType) => {
   );
 };
 
-//colocar a regra para tornar 1 das 3 div sobre turno obrigatórios* melhoria 1 
 export default ReportForms;

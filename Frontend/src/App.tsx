@@ -11,6 +11,7 @@ import ReportForms from './components/ReportForms/ReportForms'
 import ReportDetailedView from './pages/LoggedIn/reportDetailedView'
 import ReportList from './pages/LoggedIn/ReportList'
 
+
 function App() {
   return (
     <>

@@ -1,80 +1,112 @@
 .type-activities {
-  display: flex;
-  justify-content: space-between;
-  padding: 20px;
-  border: 2px groove #000;
-  border-radius: 10px;
-  width: auto;
-  max-width: auto;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border: 2px groove #000;
+    border-radius: 10px;
+    width: auto;
+    max-width: auto;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+    position: relative;
 }
 
 .type-activities > div {
-  flex: 1;
-  margin: 0 10px;
-  padding: 20px;
-  text-align: center;
+    width: 100%;
+    margin: 10px 0;
+    padding: 20px;
+    text-align: center;
 }
 
 .type--activities {
-  padding: 20px;
+    padding: 20px;
 }
 
 .font-size {
-  font-size: 18px;
-  font-weight: bold;
-  padding-bottom: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    padding-bottom: 15px;
 }
 
 .add-button {
-  width: 40px;
-  height: 40px;
-  font-size: 1.5rem;
-  padding: 10px 30px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  font-size: small;
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+    padding: 10px 30px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    font-size: small;
+    position: absolute; 
+    top: 20px; 
+    right: 20px; 
 }
 
 .add-button:hover {
-  background-color: darkcyan;
+    background-color: darkcyan;
+}
+
+.add-executed-button {
+    width: 150px;
+    height: 40px;
+    font-size: 1rem;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    font-size: small;
+    margin-top: 20px; 
+    align-self: flex-start; 
+}
+
+.add-executed-button:hover {
+    background-color: darkcyan;
 }
 
 .quantity-input .form-input {
-  width: 100px;
-  padding: 5px;
-  margin-top: 10px;
-  color: black;
+    width: 100px;
+    padding: 5px;
+    margin-top: 10px;
+    color: black;
 }
 
 .executed-activity {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
 }
 
 .activity-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .remove-button {
-  background-color: red;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  padding: 5px 10px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px 10px;
 }
 
 .remove-button:hover {
-  background-color: darkred;
+    background-color: darkred;
+}
+
+.form-input {
+    color: black;
+    background-color: #ececec;
 }
