@@ -33,9 +33,9 @@ const ProjectRegister = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-gray-100 p-6 rounded-lg shadow-md space-y-4">
+    <form onSubmit={handleSubmit} className="bg-gray-800 p-6 gap-2 rounded-lg shadow-md space-y-4">
       <div>
-        <label className="block mb-1 font-semibold">ID da Obra</label>
+        <label className="block text-white text-2xl text-center mb-1 font-semibold">ID da Obra</label>
         <input
           type="number"
           name="id"
@@ -45,7 +45,7 @@ const ProjectRegister = () => {
         />
       </div>
       <div>
-        <label className="block mb-1 font-semibold">Nome da Obra</label>
+        <label className="block text-white text-2xl text-center mb-1 font-semibold">Nome da Obra</label>
         <input
           type="text"
           name="name"
@@ -55,7 +55,7 @@ const ProjectRegister = () => {
         />
       </div>
       <div>
-        <label className="block mb-1 font-semibold">Localização</label>
+        <label className="block text-white text-2xl text-center mb-1 font-semibold">Localização</label>
         <input
           type="text"
           name="location"
@@ -65,7 +65,7 @@ const ProjectRegister = () => {
         />
       </div>
       <div>
-        <label className="block mb-1 font-semibold">Data de Início</label>
+        <label className="block text-white text-2xl text-center mb-1 font-semibold">Data de Início</label>
         <input
           type="date"
           name="startDate"
@@ -75,7 +75,7 @@ const ProjectRegister = () => {
         />
       </div>
       <div>
-        <label className="block mb-1 font-semibold">Data de Término</label>
+        <label className="block text-white text-2xl text-center mb-1 font-semibold">Data de Término</label>
         <input
           type="date"
           name="endDate"
@@ -84,7 +84,7 @@ const ProjectRegister = () => {
           className="border border-gray-300 rounded w-full p-2"
         />
       </div>
-      <button type="submit" className="bg-blue-500 text-white rounded px-4 py-2">
+      <button type="submit" className="bg-red-500 text-white text-3xl rounded px-4 py-2">
         Registrar Obra
       </button>
     </form>
