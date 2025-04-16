@@ -10,6 +10,7 @@ import FormLayout from './pages/Form/FormLayout'
 import ReportForms from './components/ReportForms/ReportForms'
 import ReportDetailedView from './pages/LoggedIn/reportDetailedView'
 import ReportList from './pages/LoggedIn/ReportList'
+import ProjectRegister from './pages/LoggedIn/ProjectRegister'
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route element={<LoggedInLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/survey" element={<ProjectsList projects={MockProjectData} />} />
+            <Route path="/survey/create" element={<ProjectRegister />} />
             <Route path="survey/projectReports" element={<ReportList />} />
             <Route path="survey/projectReports/:id" element={<ReportDetailedView />} />
             <Route path="/survey/projectReports/create" element={<ReportForms/>} />
