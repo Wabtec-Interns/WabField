@@ -6,7 +6,7 @@ function ControlTurns({ formData, handleChange, TYPE_REPORT_CHOICES, WEATHER_CON
         <div className="control-turns">
   <div>
     <div className="text-left mb-6 font-size" style={{ textAlign: 'center' }}>
-      Turno noite:
+      Turno manhã:
     </div>
     <div style={{ textAlign: "left" }}>Tipo de registro:</div>
     <select className="form-select" name="morningType" value={formData.morningType} onChange={handleChange}>

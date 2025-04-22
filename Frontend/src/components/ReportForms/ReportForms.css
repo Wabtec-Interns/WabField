@@ -1,8 +1,14 @@
 .bg-custom {
-  background-color: #d3d3d39f;
+  background-image: url('Frontend/src/assets/campo.png');
+  background-size: cover;
+  background-position: center;
   width: 100%;
   max-width: 1500px; 
   margin-top: 0; 
-  color: black; 
+  color:white; 
   border-radius: 0.25rem; 
+  position: relative;
 }
+
+
+
