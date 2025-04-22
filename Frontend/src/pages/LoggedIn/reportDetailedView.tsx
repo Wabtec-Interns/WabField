@@ -16,11 +16,6 @@ interface ReportData {
   nightWork: string;
   weatherCondition: string;
   workCondition: string;
-  typeContract: string;
-  directProfissional: string;
-  indirectProfissional: string;
-  outsourcedProfissional: string;
-  professional: string;
   nameWork: string;
   responsable: string;
   company: string;
@@ -30,9 +25,9 @@ interface ReportData {
   hourEnd: string;
   hourRestBegin: string;
   hourRestEnd: string;
-  activitiesType?: string;
-  activitiesExecuted?: string;
-  activitiesPerCent?: string;
+  
+  contracts?: Array<{ typeContract: string; professional: string; quantity: string }>;
+  activities?: Array<{ activitiesType: string; activitiesExecuted: string; activitiesPerCent: string }> | null;
 }
 
 const ReportDetailedView: React.FC = () => {
