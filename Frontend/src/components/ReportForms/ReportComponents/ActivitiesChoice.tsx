@@ -1,8 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './ActivitiesChoice.css';
 
-function ActivitiesChoice({ formData, handleChange, ACTIVITIES_CHOICES, getActivitiesChoices }) {
+function ActivitiesChoice({ formData, handleChange, ACTIVITIES_CHOICES, getActivitiesChoices, updateFormDataWithActivities }) {
     const [activities, setActivities] = useState([{ activitiesType: '', activitiesExecuted: [], activitiesPerCent: [] }]);
+
+    
+    useEffect(() => {
+        updateFormDataWithActivities(activities);
+    }, [activities, updateFormDataWithActivities]);
+    
 
     const handleAddActivitie = () => {
         setActivities([...activities, { activitiesType: '', activitiesExecuted: [], activitiesPerCent: [] }]);
@@ -117,7 +123,7 @@ function ActivitiesChoice({ formData, handleChange, ACTIVITIES_CHOICES, getActiv
                                         onChange={(e) => handlePerCentChange(index, executedIndex, e)}
                                         min="0"
                                         max="100"
-                                        maxLength="3"
+                                        maxLength={3}
                                         pattern="\d{1,3}"
                                         required
                                     />

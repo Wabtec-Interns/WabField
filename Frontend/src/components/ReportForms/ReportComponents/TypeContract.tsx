@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './TypeContract.css';
 
 function TypeContract({ formData, handleChange, TYPE_CONTRACT_CHOICES, getProfessionalChoices }) {
     const [contracts, setContracts] = useState([{ typeContract: '', professional: '', quantity: '' }]);
+
+    useEffect(() => {
+        handleChange({ target: { name: 'contracts', value: contracts } });
+    }, [contracts, handleChange]);
 
     const handleAddContract = () => {
         setContracts([...contracts, { typeContract: '', professional: '', quantity: '' }]);

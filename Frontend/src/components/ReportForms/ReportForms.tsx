@@ -1,20 +1,15 @@
 import { useState, useEffect } from "react";
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { getValueByDataKey } from "recharts/types/util/ChartUtils";
-import { Label } from "recharts";
 import "./ReportForms.css";  
 import HeaderForms from "./ReportComponents/HeaderForms";
 import ControlDateHour from "./ReportComponents/ControlDateHour";
 import ControlTurns from "./ReportComponents/ControlTurns";
-import TypeContract from "./ReportComponents/TypeContract";
-import ActivitiesChoice from "./ReportComponents/ActivitiesChoice";
 import H1 from "./ReportComponents/H1";
 import FileUploadForm from "./ReportComponents/FileUploadForm";
-import InputMask from 'react-input-mask'; 
 import { useNavigate } from "react-router";
-
-
+import TypeContract from "./ReportComponents/TypeContract";
+import ActivitiesChoice from "./ReportComponents/ActivitiesChoice";
 
 type FormData = {
   id: number;
@@ -48,6 +43,8 @@ type FormData = {
   activitiesType: string;
   activitiesExecuted: string;
   activitiesPerCent: string;
+  contracts: [], 
+  activities: [],
 };
 
 const ReportForms = () => {
@@ -83,6 +80,8 @@ const ReportForms = () => {
     activitiesType: "",
     activitiesExecuted: "",
     activitiesPerCent: "",
+    contracts: [], 
+    activities: [],
   });
 
 const REPORT_STATUS_CHOICES = [
@@ -239,6 +238,15 @@ const getActivitiesChoices = (activitiesType) => {
 };
 
 
+const updateFormDataWithContracts = (contracts) => {
+  setFormData((prev) => ({ ...prev, contracts }));
+  };
+  
+  const updateFormDataWithActivities = (activities) => {
+  setFormData((prev) => ({ ...prev, activities }));
+  };
+  
+
   useEffect(() => {
     console.log("Fetching dropdown options...");
   }, []);
@@ -252,12 +260,14 @@ const getActivitiesChoices = (activitiesType) => {
 
   
 
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     alert('Relatório enviado');
     localStorage.setItem("reportData", JSON.stringify(formData));
     navigate(`/survey/projectReports/${formData.id}`, {state: {formData}});
-  };
+  }
+  
 
   return (
     <div className="container bg-custom center">
@@ -267,7 +277,7 @@ const getActivitiesChoices = (activitiesType) => {
         <ControlDateHour formData={formData} handleChange={handleChange} />
         <ControlTurns formData={formData} handleChange={handleChange} TYPE_REPORT_CHOICES={TYPE_REPORT_CHOICES} WEATHER_CONDITION_CHOICES={WEATHER_CONDITION_CHOICES} WORK_CONDITION_CHOICES={WORK_CONDITION_CHOICES} />
         <TypeContract formData={formData} handleChange={handleChange} TYPE_CONTRACT_CHOICES={TYPE_CONTRACT_CHOICES} getProfessionalChoices={getProfessionalChoices} />
-        <ActivitiesChoice formData={formData} handleChange={handleChange} ACTIVITIES_CHOICES={ACTIVITIES_CHOICES} getActivitiesChoices={getActivitiesChoices} />
+        <ActivitiesChoice formData={formData} handleChange={handleChange} ACTIVITIES_CHOICES={ACTIVITIES_CHOICES} getActivitiesChoices={getActivitiesChoices} updateFormDataWithActivities={updateFormDataWithActivities} />
         <FileUploadForm />
         
         <button type="submit" className="btn btn-primary w-100 mt-3">Enviar</button>

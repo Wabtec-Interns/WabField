@@ -78,21 +78,18 @@ const ReportDetailedView: React.FC = () => {
           <div className="border border-gray-200 rounded p-3">
             <h3 className="font-semibold">Manhã</h3>
             <p>Tipo: {data.morningType}</p>
-            <p>Horário: {data.hourBegin}</p>
             <p>Tempo: {data.morningWeather}</p>
             <p>Trabalho: {data.morningWork}</p>
           </div>
           <div className="border border-gray-200 rounded p-3">
             <h3 className="font-semibold">Tarde</h3>
             <p>Tipo: {data.afternoonType}</p>
-            <p>Horário: {/* Se houver hora específica, ajuste aqui */}</p>
             <p>Tempo: {data.afternoonWeather}</p>
             <p>Trabalho: {data.afternoonWork}</p>
           </div>
           <div className="border border-gray-200 rounded p-3">
             <h3 className="font-semibold">Noite</h3>
             <p>Tipo: {data.nightType}</p>
-            <p>Horário: {data.hourEnd}</p>
             <p>Tempo: {data.nightWeather}</p>
             <p>Trabalho: {data.nightWork}</p>
           </div>
