@@ -135,7 +135,7 @@ const ReportDetailedView: React.FC = () => {
                 <p>Atividade - Executadas: {activity.activitiesExecuted.join(', ')}</p>
               )}
               {activity.activitiesPerCent && (
-                <p>Atividade - Percentual: {activity.activitiesPerCent.join(', ')}</p>
+                <p>Atividade - Percentual: {activity.activitiesPerCent.join(', ')}%</p>
               )}
             </div>
           ))}
