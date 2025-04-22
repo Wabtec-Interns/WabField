@@ -4,10 +4,9 @@ import './ActivitiesChoice.css';
 function ActivitiesChoice({ formData, handleChange, ACTIVITIES_CHOICES, getActivitiesChoices, updateFormDataWithActivities }) {
     const [activities, setActivities] = useState([{ activitiesType: '', activitiesExecuted: [], activitiesPerCent: [] }]);
 
-    
     useEffect(() => {
         updateFormDataWithActivities(activities);
-    }, [activities, updateFormDataWithActivities]);
+    }, [activities]);
     
 
     const handleAddActivitie = () => {

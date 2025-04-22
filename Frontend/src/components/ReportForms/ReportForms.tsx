@@ -258,15 +258,22 @@ const updateFormDataWithContracts = (contracts) => {
 
   const navigate = useNavigate();
 
-  
-
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!formData.contracts.length || !formData.activities.length) {
+        alert('Por favor, preencha todos os campos obrigatórios.');
+        return;
+    }
+
     alert('Relatório enviado');
     localStorage.setItem("reportData", JSON.stringify(formData));
-    navigate(`/survey/projectReports/${formData.id}`, {state: {formData}});
-  }
+    alert('Aguarde, estamos gerando seu relatório...');
+    setTimeout(() => {
+      window.location.href = `/survey/projectReports/${formData.id}`;
+    }, 100); // 100ms de atraso
+};
   
 
   return (
@@ -276,7 +283,7 @@ const updateFormDataWithContracts = (contracts) => {
         <HeaderForms formData={formData} handleChange={handleChange} COMPANY_CHOICES={COMPANY_CHOICES} RESPONSABLE_CHOICES={RESPONSABLE_CHOICES} />
         <ControlDateHour formData={formData} handleChange={handleChange} />
         <ControlTurns formData={formData} handleChange={handleChange} TYPE_REPORT_CHOICES={TYPE_REPORT_CHOICES} WEATHER_CONDITION_CHOICES={WEATHER_CONDITION_CHOICES} WORK_CONDITION_CHOICES={WORK_CONDITION_CHOICES} />
-        <TypeContract formData={formData} handleChange={handleChange} TYPE_CONTRACT_CHOICES={TYPE_CONTRACT_CHOICES} getProfessionalChoices={getProfessionalChoices} />
+        <TypeContract formData={formData} handleChange={handleChange} TYPE_CONTRACT_CHOICES={TYPE_CONTRACT_CHOICES} getProfessionalChoices={getProfessionalChoices} updateFormDataWithContracts={updateFormDataWithContracts} />
         <ActivitiesChoice formData={formData} handleChange={handleChange} ACTIVITIES_CHOICES={ACTIVITIES_CHOICES} getActivitiesChoices={getActivitiesChoices} updateFormDataWithActivities={updateFormDataWithActivities} />
         <FileUploadForm />
         
