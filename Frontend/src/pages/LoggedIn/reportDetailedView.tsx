@@ -25,9 +25,11 @@ interface ReportData {
   hourEnd: string;
   hourRestBegin: string;
   hourRestEnd: string;
-  
-  contracts?: Array<{ typeContract: string; professional: string; quantity: string }>;
-  activities?: Array<{ activitiesType: string; activitiesExecuted: string; activitiesPerCent: string }> | null;
+  activitiesType?: string;
+  activitiesExecuted?: string;
+  activitiesPerCent?: string;
+  contracts?: Array<{typeContract: string, professional: string, quantity: string}>;
+  activities?: Array<{activitiesType: string, activitiesExecuted: string, activitiesPerCent: string}>;
 }
 
 const ReportDetailedView: React.FC = () => {
@@ -104,38 +106,36 @@ const ReportDetailedView: React.FC = () => {
         </div>
 
         {/* Contratação e Profissional */}
+      {data.contracts && data.contracts.length > 0 && (
         <div className="border border-gray-200 rounded p-3">
           <h2 className="text-lg font-semibold">Contratação e Profissional</h2>
-          <p>Tipo de Contrato: {data.typeContract}</p>
-          <p>Profissional Direto: {data.directProfissional}</p>
-          <p>Profissional Indireto: {data.indirectProfissional}</p>
-          <p>Profissional Terceirizado: {data.outsourcedProfissional}</p>
-          <p>Profissional: {data.professional}</p>
+          {data.contracts.map((contract, index) => (
+            <div key={index} className="mb-2">
+              <p>Tipo de Contrato: {contract.typeContract}</p>
+              <p>Profissional: {contract.professional}</p>
+              <p>Quantidade: {contract.quantity}</p>
+            </div>
+          ))}
         </div>
+      )}
 
-        {/* Atividades realizadas */}
-        {(data.activitiesType || data.activitiesExecuted || data.activitiesPerCent) && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {data.activitiesType && (
-              <div className="border border-gray-200 rounded p-3">
-                <h3 className="font-semibold">Atividade - Tipo</h3>
-                <p>{data.activitiesType}</p>
-              </div>
-            )}
-            {data.activitiesExecuted && (
-              <div className="border border-gray-200 rounded p-3">
-                <h3 className="font-semibold">Atividade - Executadas</h3>
-                <p>{data.activitiesExecuted}</p>
-              </div>
-            )}
-            {data.activitiesPerCent && (
-              <div className="border border-gray-200 rounded p-3">
-                <h3 className="font-semibold">Atividade - Percentual</h3>
-                <p>{data.activitiesPerCent}</p>
-              </div>
-            )}
-          </div>
-        )}
+      {/* Atividades realizadas */}
+      {data.activities && data.activities.length > 0 && (
+        <div className="border border-gray-200 rounded p-3">
+          <h2 className="text-lg font-semibold">Atividades realizadas</h2>
+          {data.activities.map((activity, index) => (
+            <div key={index} className="mb-2">
+              <p>Atividade - Tipo: {activity.activitiesType}</p>
+              {activity.activitiesExecuted && (
+                <p>Atividade - Executadas: {activity.activitiesExecuted.join(', ')}</p>
+              )}
+              {activity.activitiesPerCent && (
+                <p>Atividade - Percentual: {activity.activitiesPerCent.join(', ')}</p>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
       </main>
     </div>
   );
