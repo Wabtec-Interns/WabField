@@ -1,6 +1,7 @@
 import React from 'react'
 import  wabtecWhiteLogo  from '../../assets/WAB.D.svg'
 
+
 interface ReportData {
   id: number;
   status: string;
@@ -34,6 +35,8 @@ interface ReportData {
 
 const ReportDetailedView: React.FC = () => {
   const data = JSON.parse(localStorage.getItem('reportData') || '{}') as ReportData;
+
+ // ...existing code...
 
   return (
     <div className="min-h-screen p-4">

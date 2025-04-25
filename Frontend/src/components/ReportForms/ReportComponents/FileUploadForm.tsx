@@ -1,85 +1,96 @@
-
-
 import React, { useState } from "react";
-import "./FileUploadForm.css"; // Certifique-se de criar e importar o arquivo CSS
+import "./FileUploadForm.css";
 
-function FileUploadForm() {
+interface FileUploadFormProps {
+  formData: any; // Substitua "any" pelo tipo correto, se disponível
+  setFormData: React.Dispatch<React.SetStateAction<any>>;
+}
+
+const FileUploadForm: React.FC<FileUploadFormProps> = ({ formData, setFormData }) => {
   const [files, setFiles] = useState({ image: [], video: [], file: [] });
 
-  const handleFileChange = (e) => {
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, files: selectedFiles } = e.target;
-    setFiles(prevFiles => ({
-      ...prevFiles,
-      [name]: [...prevFiles[name], ...Array.from(selectedFiles)]
-    }));
-  };
+    if (!selectedFiles) return;
 
-  interface FileListState {
-    image: File[];
-    video: File[];
-    file: File[];
-  }
-
-  interface FileUploadEvent extends React.ChangeEvent<HTMLInputElement> {
-    target: HTMLInputElement & { name: keyof FileListState; files: FileList | null };
-  }
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
-    e.preventDefault();
-
-    const formData = new FormData();
-    Object.keys(files).forEach((key) => {
-      const fileKey = key as keyof FileListState;
-      files[fileKey].forEach((file) => {
-        formData.append(fileKey, file);
+    const fileArray = Array.from(selectedFiles);
+    const promises = fileArray.map((file) => {
+      return new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result as string);
+        reader.onerror = () => reject(reader.error);
+        reader.readAsDataURL(file);
       });
     });
 
-    try {
-      const response = await fetch("URL_DO_SEU_BACKEND", {
-        method: "POST",
-        body: formData,
-      });
+    Promise.all(promises)
+      .then((base64Files) => {
+        setFiles((prevFiles) => ({
+          ...prevFiles,
+          [name]: [...prevFiles[name], ...base64Files],
+        }));
 
-      if (response.ok) {
-        alert("Arquivos enviados com sucesso!");
-      } else {
-        alert("Falha ao enviar os arquivos.");
-      }
-    } catch (error) {
-      console.error("Erro ao enviar os arquivos:", error);
-      alert("Erro ao enviar os arquivos.");
-    }
+        // Atualizar o estado principal do formulário
+        setFormData((prevFormData: any) => ({
+          ...prevFormData,
+          files: {
+            ...prevFormData.files,
+            [name]: [...(prevFormData.files?.[name] || []), ...base64Files],
+          },
+        }));
+      })
+      .catch((error) => console.error("Erro ao converter arquivos para base64:", error));
   };
 
   return (
-    <form className="file-upload-form" onSubmit={handleSubmit}>
-    <div className="upload-section">
-      <label htmlFor="image-upload" className="upload-label">
-        <span className="upload-icon">📁</span>
-        <span className="upload-text">Selecione uma imagem</span>
-      </label>
-      <input type="file" id="image-upload" name="image" accept="image/*" multiple onChange={handleFileChange} />
-      <div className="file-count">Imagens selecionadas: {files.image.length}</div>
-    </div>
-    <div className="upload-section">
-      <label htmlFor="video-upload" className="upload-label">
-        <span className="upload-icon">🎥</span>
-        <span className="upload-text">Selecione um vídeo</span>
-      </label>
-      <input type="file" id="video-upload" name="video" accept="video/*" multiple onChange={handleFileChange} />
-      <div className="file-count">Vídeos selecionados: {files.video.length}</div>
-    </div>
-    <div className="upload-section">
-      <label htmlFor="file-upload" className="upload-label">
-        <span className="upload-icon">📄</span>
-        <span className="upload-text">Selecione um arquivo</span>
-      </label>
-      <input type="file" id="file-upload" name="file" accept="*/*" multiple onChange={handleFileChange} />
-      <div className="file-count">Arquivos selecionados: {files.file.length}</div>
-    </div>
-  </form>
+    <form className="file-upload-form">
+      <div className="upload-section">
+        <label htmlFor="image-upload" className="upload-label">
+          <span className="upload-icon">📁</span>
+          <span className="upload-text">Selecione uma imagem</span>
+        </label>
+        <input
+          type="file"
+          id="image-upload"
+          name="image"
+          accept="image/*"
+          multiple
+          onChange={handleFileChange}
+        />
+        <div className="file-count">Imagens selecionadas: {files.image.length}</div>
+      </div>
+      <div className="upload-section">
+        <label htmlFor="video-upload" className="upload-label">
+          <span className="upload-icon">🎥</span>
+          <span className="upload-text">Selecione um vídeo</span>
+        </label>
+        <input
+          type="file"
+          id="video-upload"
+          name="video"
+          accept="video/*"
+          multiple
+          onChange={handleFileChange}
+        />
+        <div className="file-count">Vídeos selecionados: {files.video.length}</div>
+      </div>
+      <div className="upload-section">
+        <label htmlFor="file-upload" className="upload-label">
+          <span className="upload-icon">📄</span>
+          <span className="upload-text">Selecione um arquivo</span>
+        </label>
+        <input
+          type="file"
+          id="file-upload"
+          name="file"
+          accept="*/*"
+          multiple
+          onChange={handleFileChange}
+        />
+        <div className="file-count">Arquivos selecionados: {files.file.length}</div>
+      </div>
+    </form>
   );
-}
+};
 
 export default FileUploadForm;

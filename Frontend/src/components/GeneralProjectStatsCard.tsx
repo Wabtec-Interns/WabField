@@ -151,7 +151,7 @@ class GeneralProjectStatsCard extends PureComponent<{}, GeneralProjectStatsCardS
                   <TabsTrigger
                     key={'description'}
                     value='Description'
-                    className='gap-2 p-2'
+                    className='gap-2 p-2 text-white'
                   >
                     <p>Descrição Geral</p>
                   </TabsTrigger>
@@ -159,7 +159,7 @@ class GeneralProjectStatsCard extends PureComponent<{}, GeneralProjectStatsCardS
                   <TabsTrigger
                     key={'chart'}
                     value='Chart'
-                    className='gap-2 p-2'
+                    className='gap-2 p-2 text-white' 
                     >
                     <p>Gráfico</p>
                   </TabsTrigger>
