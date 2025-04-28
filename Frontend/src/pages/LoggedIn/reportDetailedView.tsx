@@ -2,9 +2,8 @@ import React from 'react'
 import  wabtecWhiteLogo  from '../../assets/WAB.D.svg'
 import { ReportData } from '@/interfaces/IreportData';
 import { REPORT_STATUS_CHOICES, TYPE_REPORT_CHOICES, WEATHER_CONDITION_CHOICES, WORK_CONDITION_CHOICES, TYPE_CONTRACT_CHOICES, DIRECT_PROFISSIONAL_CHOICES, INDIRECT_PROFISSIONAL_CHOICES, OUTSOURCED_PROFISSIONAL_CHOICES, ACTIVITIES_CHOICES, TYPE_ACTIVITIES1, TYPE_ACTIVITIES2, TYPE_ACTIVITIES3 } from '@/interfaces/IReportChoices';
-
-
-
+import * as XLSX from 'xlsx';
+import {saveAs} from 'file-saver'
 
 const ReportDetailedView: React.FC = () => {
   const data = JSON.parse(localStorage.getItem('reportData') || '{}') as ReportData;
@@ -12,6 +11,86 @@ const ReportDetailedView: React.FC = () => {
  const getPortugueseLabel = (choices: [string, string][], key: string) => {
     const found = choices.find(([english]) => english === key);
     return found ? found[1] : key;
+ }
+
+ const exportToExcel = () => {
+    const exportData = [
+      { Campo: "Status", Valor: getPortugueseLabel(REPORT_STATUS_CHOICES, data.status) },
+      { Campo: "Tipo de Relatório", Valor: getPortugueseLabel(TYPE_REPORT_CHOICES, data.type) },
+      { Campo: "Obra", Valor: data.nameWork },
+      { Campo: "Responsável", Valor: data.responsable },
+      { Campo: "Data Início", Valor: data.dateBegin },
+      { Campo: "Hora Início", Valor: data.hourBegin },
+      { Campo: "Data Fim", Valor: data.dateEnd },
+      { Campo: "Hora Fim", Valor: data.hourEnd },
+      { Campo: "Hora Início do Intervalo", Valor: data.hourRestBegin },
+      { Campo: "Hora Fim do Intervalo", Valor: data.hourRestEnd },
+      
+    ]
+
+    if(data.contracts && data.contracts.length > 0) {
+      data.contracts.forEach((contract, index) => {
+        exportData.push({
+          Campo: `Contrato ${index + 1} - Tipo de Contrato`,
+          Valor: getPortugueseLabel(TYPE_CONTRACT_CHOICES, contract.typeContract)
+        });
+        exportData.push({
+          Campo: `Contrato ${index + 1} - Profissional`,
+          Valor: contract.typeContract === "Direct" ? getPortugueseLabel(DIRECT_PROFISSIONAL_CHOICES, contract.professional)
+                  : contract.typeContract === "Indirect" ? getPortugueseLabel(INDIRECT_PROFISSIONAL_CHOICES, contract.professional)
+                  : contract.typeContract === "Outsourced" ? getPortugueseLabel(OUTSOURCED_PROFISSIONAL_CHOICES, contract.professional)
+                  : contract.professional
+        });
+        exportData.push({
+          Campo: `Contrato ${index + 1} - Quantidade`,
+          Valor: contract.quantity
+        });
+      });
+    }
+
+    // Para atividades, pode-se montar também os dados individualmente:
+    if(data.activities && data.activities.length > 0) {
+      data.activities.forEach((activity, index) => {
+        exportData.push({
+          Campo: `Atividade ${index + 1} - Tipo`,
+          Valor: getPortugueseLabel(ACTIVITIES_CHOICES, activity.activitiesType)
+        });
+        if(activity.activitiesExecuted) {
+          // Supondo que seja array (senão, use split(','))
+          const executadas = Array.isArray(activity.activitiesExecuted)
+            ? activity.activitiesExecuted.map((exc) =>
+                activity.activitiesType === "Activities 1"
+                  ? getPortugueseLabel(TYPE_ACTIVITIES1, exc)
+                  : activity.activitiesType === "Activities 2"
+                  ? getPortugueseLabel(TYPE_ACTIVITIES2, exc)
+                  : activity.activitiesType === "Activities 3"
+                  ? getPortugueseLabel(TYPE_ACTIVITIES3, exc)
+                  : exc
+              ).join(", ")
+            : activity.activitiesExecuted;
+          exportData.push({
+            Campo: `Atividade ${index + 1} - Executadas`,
+            Valor: executadas
+          });
+        }
+        if(activity.activitiesPerCent) {
+          const perc = Array.isArray(activity.activitiesPerCent)
+            ? activity.activitiesPerCent.join(", ") + "%"
+            : activity.activitiesPerCent;
+          exportData.push({
+            Campo: `Atividade ${index + 1} - Percentual`,
+            Valor: perc
+          });
+        }
+      });
+    }
+
+    const worksheet = XLSX.utils.json_to_sheet(exportData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Relatório Detalhado");
+    const excelBuffer = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
+    const dataBlob = new Blob([excelBuffer], { type: "application/octet-stream" });
+    saveAs(dataBlob, "relatorio_detalhado.xlsx");
  }
 
   return (
@@ -53,6 +132,16 @@ const ReportDetailedView: React.FC = () => {
           </div>
         </div>
       </header>
+
+      {/* Botão para exportar */}
+      <div className="mb-4 flex justify-end">
+        <button
+          onClick={exportToExcel}
+          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+        >
+          Exportar para Excel
+        </button>
+      </div>
 
       <main className="bg-white p-4 rounded shadow space-y-6">
         {/* Períodos (3 cards lado a lado) */}
