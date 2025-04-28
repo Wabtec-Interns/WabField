@@ -1,42 +1,18 @@
 import React from 'react'
 import  wabtecWhiteLogo  from '../../assets/WAB.D.svg'
+import { ReportData } from '@/interfaces/IreportData';
+import { REPORT_STATUS_CHOICES, TYPE_REPORT_CHOICES, WEATHER_CONDITION_CHOICES, WORK_CONDITION_CHOICES, TYPE_CONTRACT_CHOICES, DIRECT_PROFISSIONAL_CHOICES, INDIRECT_PROFISSIONAL_CHOICES, OUTSOURCED_PROFISSIONAL_CHOICES, ACTIVITIES_CHOICES, TYPE_ACTIVITIES1, TYPE_ACTIVITIES2, TYPE_ACTIVITIES3 } from '@/interfaces/IReportChoices';
 
 
-interface ReportData {
-  id: number;
-  status: string;
-  type: string;
-  morningType: string;
-  morningWeather: string;
-  morningWork: string;
-  afternoonType: string;
-  afternoonWeather: string;
-  afternoonWork: string;
-  nightType: string;
-  nightWeather: string;
-  nightWork: string;
-  weatherCondition: string;
-  workCondition: string;
-  nameWork: string;
-  responsable: string;
-  company: string;
-  dateBegin: string;
-  hourBegin: string;
-  dateEnd: string;
-  hourEnd: string;
-  hourRestBegin: string;
-  hourRestEnd: string;
-  activitiesType?: string;
-  activitiesExecuted?: string;
-  activitiesPerCent?: string;
-  contracts?: Array<{typeContract: string, professional: string, quantity: string}>;
-  activities?: Array<{activitiesType: string, activitiesExecuted: string, activitiesPerCent: string}>;
-}
+
 
 const ReportDetailedView: React.FC = () => {
   const data = JSON.parse(localStorage.getItem('reportData') || '{}') as ReportData;
 
- // ...existing code...
+ const getPortugueseLabel = (choices: [string, string][], key: string) => {
+    const found = choices.find(([english]) => english === key);
+    return found ? found[1] : key;
+ }
 
   return (
     <div className="min-h-screen p-4">
@@ -45,8 +21,14 @@ const ReportDetailedView: React.FC = () => {
         <div>
           <h1 className="text-xl font-bold">Relatório Detalhado</h1>
           <div className="mt-2">
-            <span className="mr-4">Status: {data.status}</span>
-            <span className="mr-4">Tipo de Relatório: {data.type}</span>
+            <span className="mr-4">
+              Status: {""}
+              {getPortugueseLabel(REPORT_STATUS_CHOICES, data.status)}
+            </span>
+            <span className="mr-4">
+              Tipo de Relatório: {" "}
+              {getPortugueseLabel(TYPE_REPORT_CHOICES, data.type)}
+              </span>
           </div>
           <div className="mt-2">
             <p>Obra: {data.nameWork} - Responsável: {data.responsable}</p>
@@ -77,21 +59,49 @@ const ReportDetailedView: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="border border-gray-200 rounded p-3">
             <h3 className="font-semibold">Manhã</h3>
-            <p>Tipo: {data.morningType}</p>
-            <p>Tempo: {data.morningWeather}</p>
-            <p>Trabalho: {data.morningWork}</p>
+            <p>
+              Tipo: {""}
+              {getPortugueseLabel(TYPE_REPORT_CHOICES, data.morningType)}
+              
+            </p>
+            <p>
+              Tempo: {''}
+              {getPortugueseLabel(WEATHER_CONDITION_CHOICES, data.morningWeather)}
+            </p>
+            <p>
+              Trabalho: {""}
+              {getPortugueseLabel(WORK_CONDITION_CHOICES, data.morningWork)}
+            </p>
           </div>
           <div className="border border-gray-200 rounded p-3">
             <h3 className="font-semibold">Tarde</h3>
-            <p>Tipo: {data.afternoonType}</p>
-            <p>Tempo: {data.afternoonWeather}</p>
-            <p>Trabalho: {data.afternoonWork}</p>
+            <p>
+              Tipo: {""}
+              {getPortugueseLabel(TYPE_REPORT_CHOICES, data.afternoonType)}
+            </p>
+            <p>
+              Tempo: {""}
+              {getPortugueseLabel(WEATHER_CONDITION_CHOICES, data.afternoonWeather)}
+            </p>
+            <p>
+              Trabalho: {""}
+              {getPortugueseLabel(WORK_CONDITION_CHOICES, data.afternoonWork)}
+            </p>
           </div>
           <div className="border border-gray-200 rounded p-3">
             <h3 className="font-semibold">Noite</h3>
-            <p>Tipo: {data.nightType}</p>
-            <p>Tempo: {data.nightWeather}</p>
-            <p>Trabalho: {data.nightWork}</p>
+            <p>
+              Tipo: {""}
+              {getPortugueseLabel(TYPE_REPORT_CHOICES, data.nightType)}
+            </p>
+            <p>
+              Tempo: {""}
+              {getPortugueseLabel(WEATHER_CONDITION_CHOICES, data.nightWeather)}
+            </p>
+            <p>
+              Trabalho: {""}
+              {getPortugueseLabel(WORK_CONDITION_CHOICES, data.nightWork)}
+              </p>
           </div>
         </div>
 
@@ -114,8 +124,17 @@ const ReportDetailedView: React.FC = () => {
           <h2 className="text-lg font-semibold">Contratação e Profissional</h2>
           {data.contracts.map((contract, index) => (
             <div key={index} className="mb-2">
-              <p>Tipo de Contrato: {contract.typeContract}</p>
-              <p>Profissional: {contract.professional}</p>
+              <p>
+                Tipo de Contrato: {' '}
+                {getPortugueseLabel(TYPE_CONTRACT_CHOICES, contract.typeContract)}
+              </p>
+              <p>
+                Profissional: {" "}
+                {contract.typeContract === "Direct" ? getPortugueseLabel(DIRECT_PROFISSIONAL_CHOICES, contract.professional) : 
+                contract.typeContract === "Indirect" ? getPortugueseLabel(INDIRECT_PROFISSIONAL_CHOICES, contract.professional) :
+                contract.typeContract === "Outsourced" ? getPortugueseLabel(OUTSOURCED_PROFISSIONAL_CHOICES, contract.professional) :
+                contract.professional}
+              </p>
               <p>Quantidade: {contract.quantity}</p>
             </div>
           ))}
@@ -128,12 +147,35 @@ const ReportDetailedView: React.FC = () => {
           <h2 className="text-lg font-semibold">Atividades realizadas</h2>
           {data.activities.map((activity, index) => (
             <div key={index} className="mb-2">
-              <p>Atividade - Tipo: {activity.activitiesType}</p>
+              <p>
+                Atividade - Tipo: {""}
+                {getPortugueseLabel(ACTIVITIES_CHOICES, activity.activitiesType)}
+              </p>
               {activity.activitiesExecuted && (
-                <p>Atividade - Executadas: {activity.activitiesExecuted.join(', ')}</p>
+                <div>
+                  <p>Atividade - Executadas:</p>
+                  <ul className="list-disc ml-5">
+                    {activity.activitiesExecuted.map((exc, idx) => (
+                      <li key={idx}>
+                        {activity.activitiesType === "Activities 1"
+                          ? getPortugueseLabel(TYPE_ACTIVITIES1, exc)
+                          : activity.activitiesType === "Activities 2"
+                          ? getPortugueseLabel(TYPE_ACTIVITIES2, exc)
+                          : activity.activitiesType === "Activities 3"
+                          ? getPortugueseLabel(TYPE_ACTIVITIES3, exc)
+                          : exc}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               )}
               {activity.activitiesPerCent && (
-                <p>Atividade - Percentual: {activity.activitiesPerCent.join(', ')}%</p>
+                <p>
+                  Atividade - Percentual:{" "}
+                  {activity.activitiesPerCent.map((perc, idx) =>
+                    idx === activity.activitiesPerCent.length - 1 ? `${perc}%` : `${perc}%, `
+                  )}
+                </p>
               )}
             </div>
           ))}
