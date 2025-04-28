@@ -1,0 +1,40 @@
+export type FormData = {
+  id: number;
+  status: string;
+  type: string;
+  morningType: string;
+  morningWeather: string;
+  morningWork: string;
+  afternoonType: string;
+  afternoonWeather: string;
+  afternoonWork: string;
+  nightType: string;
+  nightWeather: string;
+  nightWork: string;
+  weatherCondition: string;
+  workCondition: string;
+  typeContract: string;
+  directProfissional: string;
+  indirectProfissional: string;
+  outsourcedProfissional: string;
+  professional: string;
+  nameWork: string;
+  responsable: string;
+  company: string;
+  dateBegin: string;
+  hourBegin: string;
+  dateEnd: string;
+  hourEnd: string;
+  hourRestBegin: string;
+  hourRestEnd: string;
+  activitiesType: string;
+  activitiesExecuted: string;
+  activitiesPerCent: string;
+  contracts: [], 
+  activities: [],
+  files: {
+    image: string[];
+    video: string[];
+    file: string[];
+};
+}

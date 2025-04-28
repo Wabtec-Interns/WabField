@@ -48,7 +48,6 @@ const ReportDetailedView: React.FC = () => {
       });
     }
 
-    // Para atividades, pode-se montar também os dados individualmente:
     if(data.activities && data.activities.length > 0) {
       data.activities.forEach((activity, index) => {
         exportData.push({
