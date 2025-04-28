@@ -94,130 +94,131 @@ const ReportForms = () => {
     }
   });
 
-const REPORT_STATUS_CHOICES = [
-  ["Aberto", "Aberto"],
-  ["Fechado", "Fechado"],
-  ["Em Andamento", "Em Andamento"],
-];
-
-const TYPE_REPORT_CHOICES = [
-  ["Visita", "Visita"],
-  ["Acompanhamento de Obra", "Acompanhamento de Obra"],
-  ["Comissionamento", "Comissionamento"],
-];
-
-const WEATHER_CONDITION_CHOICES = [
-  ["Ensolarado", "Ensolarado"],
-  ["Nublado", "Nublado"],
-  ["Chuvoso", "Chuvoso"],
-  ["Nebuloso", "Nebuloso"],
-  ["Tempestuoso", "Tempestuoso"],
-];
-
-const WORK_CONDITION_CHOICES = [
-  ["Praticável", "Praticável"],
-  ["Parcialmente Praticável", "Parcialmente Praticável"],
-  ["Impraticável", "Impraticável"],
-];
-
-const TYPE_CONTRACT_CHOICES = [
-  ["Direto", "Direto"],
-  ["Indireto", "Indireto"],
-  ["Terceirizado", "Terceirizado"],
-];
-
-const DIRECT_PROFISSIONAL_CHOICES = [
-  ["Ajudante", "Ajudante"],
-  ["Bombeiro Hidráulico", "Bombeiro Hidráulico"],
-  ["Eletricista", "Eletricista"],
-  ["Gesseiro", "Gesseiro"],
-  ["Instalador", "Instalador"],
-  ["Meio Oficial", "Meio Oficial"],
-  ["Mestre de Obra", "Mestre de Obra"],
-  ["Pedreiro", "Pedreiro"],
-  ["Pintor", "Pintor"],
-  ["Servente", "Servente"],
-];
-
-const INDIRECT_PROFISSIONAL_CHOICES = [
-  ["Engenheiro", "Engenheiro"],
-  ["Engenheiro / TST", "Engenheiro / TST"],
-  ["Estagiário", "Estagiário"],
-  ["Técnica(o) de Segurança do Trabalho", "Técnica(o) de Segurança do Trabalho"],
-  ["Técnico em edificações", "Técnico em edificações"],
-];
-
-const OUTSOURCED_PROFISSIONAL_CHOICES = [
-  [" ", " "],
-];
-
-const COMPANY_CHOICES = [
-  ["Empresa Campo", "Empresa Campo"],
-  ["Empresa Campo - Terceirizada", "Empresa Campo - Terceirizada"],
-];
-
-const RESPONSABLE_CHOICES = [
-  ["Acauã Ferreira", "Acauã Ferreira"],
-  ["Ana Amélia", "Ana Amélia"],
-  ["Externo", "Externo"],
-];
-
-const ACTIVITIES_CHOICES = [
-  ["Etapa de Infra", "Etapa de Infra"],
-  ["Etapa de Instalações", "Etapa de Instalações"],
-  ["Etapa Final de Entrega", "Etapa Final de Entrega"],
-];
-
-const TYPE_ACTIVITIES1 = [
-  ["Survey de Chegada", "Survey de Chegada"],
-  ["Sondagem do Terreno", "Sondagem do Terreno"],
-  ["Execução de Valetamento com Lançamento de Dutos", "Execução de Valetamento com Lançamento de Dutos"],
-  ["Instalação das Caixas de Passagem de 600mm", "Instalação das Caixas de Passagem de 600mm"],
-  ["Instalação das Caixas de Passagem de 800mm", "Instalação das Caixas de Passagem de 800mm"],
-  ["Execução de Travessia", "Execução de Travessia"],
-  ["Passagem dos eletrodutos sob a base", "Passagem dos eletrodutos sob a base"],
-  ["Instalação do Anel de Aterramento", "Instalação do Anel de Aterramento"],
-  ["Construção do Paralastro SW-01", "Construção do Paralastro SW-01"],
-  ["Construção da Base do Sinal", "Construção da Base do Sinal"],
-  ["Terraplanagem do Terreno da House", "Terraplanagem do Terreno da House"],
-  ["Esquadro e Caixaria da Base da House", "Esquadro e Caixaria da Base da House"],
-  ["Concretagem da Base da House", "Concretagem da Base da House"],
-  ["Acabamentos Finais e Desmobilização", "Acabamentos Finais e Desmobilização"],
-];
-
-const TYPE_ACTIVITIES2 = [
-  ["Instalação de Hastes de Aterramento", "Instalação de Hastes de Aterramento"],
-  ["Execução de Solda Exotérmica", "Execução de Solda Exotérmica"],
-  ["Medição da Resistência de Aterramento", "Medição da Resistência de Aterramento"],
-  ["Aterramento das Carcaças, BEP e Gradil", "Aterramento das Carcaças, BEP e Gradil"],
-  ["Lançamento dos Cabos", "Lançamento dos Cabos"],
-  ["Megagem dos Cabos", "Megagem dos Cabos"],
-  ["Vedação de Dutos e Caixas com Espuma", "Vedação de Dutos e Caixas com Espuma"],
-  ["Ligação do Cabo de Energia no Trafo ou Padrão", "Ligação do Cabo de Energia no Trafo ou Padrão"],
-  ["Ligações dos Cabos de Campo na House", "Ligações dos Cabos de Campo na House"],
-  ["Ligação do Cabo de Energia no QDG", "Ligação do Cabo de Energia no QDG"],
-  ["Instalação de CDV e bondeamento", "Instalação de CDV e bondeamento"],
-  ["Instalação de Sinais", "Instalação de Sinais"],
-  ["Desinstalação de MCH", "Desinstalação de MCH"],
-  ["Instalação de MCH", "Instalação de MCH"],
-  ["Ligação dos Cabos na MCH", "Ligação dos Cabos na MCH"],
-  ["Pintura do Paralastro", "Pintura do Paralastro"],
-  ["Pintura do Número da Máquina de Chave", "Pintura do Número da Máquina de Chave"],
-  ["Fixação e Instalação do Abrigo na Base", "Fixação e Instalação do Abrigo na Base"],
-  ["Retoques de Pintura no Abrigo", "Retoques de Pintura no Abrigo"],
-  ["Limpeza do Abrigo", "Limpeza do Abrigo"],
-];
-
-const TYPE_ACTIVITIES3 = [
-  ["Testes e Ajustes Mecânicos na MCH", "Testes e Ajustes Mecânicos na MCH"],
-  ["Testes e Ajustes Elétricos na MCH", "Testes e Ajustes Elétricos na MCH"],
-  ["Descomissionamento", "Descomissionamento"],
-  ["Testes de Operação com o CCO", "Testes de Operação com o CCO"],
-  ["Limpeza e Organização no Local", "Limpeza e Organização no Local"],
-  ["Entrega Técnica", "Entrega Técnica"],
-  ["Preenchimento de Termo de Entrega", "Preenchimento de Termo de Entrega"],
-  ["As Built", "As Built"],
-];
+  const REPORT_STATUS_CHOICES = [
+    ["Open", "Aberto"],
+    ["Closed", "Fechado"],
+    ["In Progress", "Em Andamento"],
+  ];
+  
+  const TYPE_REPORT_CHOICES = [
+    ["Survey", "Visita"],
+    ["Project Monitoring", "Acompanhamento de Obra"],
+    ["Commissioning", "Comissionamento"],
+  ];
+  
+  const WEATHER_CONDITION_CHOICES = [
+    ["Sunny", "Ensolarado"],
+    ["Cloudy", "Nublado"],
+    ["Rainy", "Chuvoso"],
+    ["Foggy", "Nebuloso"],
+    ["Stormy", "Tempestuoso"],
+  ];
+  
+  const WORK_CONDITION_CHOICES = [
+    ["Practicable", "Praticável"],
+    ["Partially Practicable", "Parcialmente Praticável"],
+    ["Unpracticable", "Impraticável"],
+  ];
+  
+  const TYPE_CONTRACT_CHOICES = [
+    ["Direct", "Direto"],
+    ["Indirect", "Indireto"],
+    ["Outsourced", "Terceirizado"]
+  ];
+  
+  const DIRECT_PROFISSIONAL_CHOICES = [
+    ["Helper", "Ajudante"],
+    ["Plumber", "Bombeiro Hidráulico"],
+    ["Electrician", "Eletricista"],
+    ["Plasterer", "Gesseiro"],
+    ["Installer", "Instalador"],
+    ["Half-Official", "Meio Oficial"],
+    ["Master Build", "Mestre de Obra"],
+    ["Mason", "Pedreiro"],
+    ["Painter", "Pintor"],
+    ["Servant", "Servente"],
+  
+  ];
+  
+  const INDIRECT_PROFISSIONAL_CHOICES = [
+    ["Engineer", "Engenheiro"],
+    ["Engineer / TST", "Engenheiro / TST"],
+    ["Intern", "Estagiário"],
+    ["Technical of Work Security", "Técnica(o) de Segurança do Trabalho"],
+    ["Technical of Building", "Técnico em edificações"],
+  ];
+  
+  const OUTSOURCED_PROFISSIONAL_CHOICES = [
+    [" ", " "],
+  ];
+  
+  const COMPANY_CHOICES = [
+    ["Company 1", "Empresa 1"],
+    ["Company 2", "Empresa 2"],
+  ];
+  
+  const RESPONSABLE_CHOICES = [
+    ["Acauã Ferreira", "Acauã Ferreira"],
+    ["Ana Amélia", "Ana Amélia"],
+    ["External", "Externo"],
+  ];
+  
+  const ACTIVITIES_CHOICES = [
+    ["Activities 1", "Etapa de Infra"],
+    ["Activities 2", "Etapa de Instalações"],
+    ["Activities 3", "Etapa Final de Entrega"],
+  ];
+  
+  const TYPE_ACTIVITIES1 = [
+    ["arrival_survey", "Survey de Chegada"],
+    ["terrain_survey", "Sondagem do Terreno"],
+    ["trenching_execution", "Execução de Valetamento com Lançamento de Dutos"],
+    ["installation_boxes_600mm", "Instalação das Caixas de Passagem de 600mm"],
+    ["installation_boxes_800mm", "Instalação das Caixas de Passagem de 800mm"],
+    ["crossing_execution", "Execução de Travessia"],
+    ["ducts_passing_under_base", "Passagem dos eletrodutos sob a base"],
+    ["grounding_ring_installation", "Instalação do Anel de Aterramento"],
+    ["sw01_ballast_construction", "Construção do Paralastro SW-01"],
+    ["signal_base_construction", "Construção da Base do Sinal"],
+    ["house_terrain_earthwork", "Terraplanagem do Terreno da House"],
+    ["house_base_squaring_formwork", "Esquadro e Caixaria da Base da House"],
+    ["house_base_concreting", "Concretagem da Base da House"],
+    ["final_finishes_demobilization", "Acabamentos Finais e Desmobilização"]
+  ];
+  
+  const TYPE_ACTIVITIES2 = [
+    ["ground_rod_installation", "Instalação de Hastes de Aterramento"],
+    ["exothermic_welding_execution", "Execução de Solda Exotérmica"],
+    ["ground_resistance_measurement", "Medição da Resistência de Aterramento"],
+    ["grounding_casings_bep_fence", "Aterramento das Carcaças, BEP e Gradil"],
+    ["cable_laying", "Lançamento dos Cabos"],
+    ["cable_megging", "Megagem dos Cabos"],
+    ["ducts_boxes_sealing", "Vedação de Dutos e Caixas com Espuma"],
+    ["power_cable_connection_trafo", "Ligação do Cabo de Energia no Trafo ou Padrão"],
+    ["field_cables_connection_house", "Ligações dos Cabos de Campo na House"],
+    ["power_cable_connection_qdg", "Ligação do Cabo de Energia no QDG"],
+    ["cdv_installation_bonding", "Instalação de CDV e bondeamento"],
+    ["signal_installation", "Instalação de Sinais"],
+    ["mch_uninstallation", "Desinstalação de MCH"],
+    ["mch_installation", "Instalação de MCH"],
+    ["cable_connection_mch", "Ligação dos Cabos na MCH"],
+    ["ballast_painting", "Pintura do Paralastro"],
+    ["machine_key_number_painting", "Pintura do Número da Máquina de Chave"],
+    ["shelter_fixation_installation", "Fixação e Instalação do Abrigo na Base"],
+    ["shelter_paint_touchups", "Retoques de Pintura no Abrigo"],
+    ["shelter_cleaning", "Limpeza do Abrigo"]
+  ];
+  
+  const TYPE_ACTIVITIES3 = [
+    ["mechanical_tests_adjustments_mch", "Testes e Ajustes Mecânicos na MCH"],
+    ["electrical_tests_adjustments_mch", "Testes e Ajustes Elétricos na MCH"],
+    ["decommissioning", "Descomissionamento"],
+    ["operation_tests_cco", "Testes de Operação com o CCO"],
+    ["cleaning_organization_site", "Limpeza e Organização no Local"],
+    ["technical_delivery", "Entrega Técnica"],
+    ["delivery_term_filling", "Preenchimento de Termo de Entrega"],
+    ["as_built", "As Built"]
+  ];
 
 
 

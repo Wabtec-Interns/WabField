@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import './ActivitiesChoice.css';
-
+ 
 function ActivitiesChoice({ formData, handleChange, ACTIVITIES_CHOICES, getActivitiesChoices, updateFormDataWithActivities }) {
     const [activities, setActivities] = useState([{ activitiesType: '', activitiesExecuted: [], activitiesPerCent: [] }]);
-
+ 
     useEffect(() => {
         updateFormDataWithActivities(activities);
     }, [activities]);
-    
-
+   
+ 
     const handleAddActivitie = () => {
         setActivities([...activities, { activitiesType: '', activitiesExecuted: [], activitiesPerCent: [] }]);
     };
-
+ 
     const handleActivitiesChange = (index, event) => {
         const { name, value } = event.target;
         const newActivities = activities.map((activitie, i) => {
@@ -23,7 +23,7 @@ function ActivitiesChoice({ formData, handleChange, ACTIVITIES_CHOICES, getActiv
         });
         setActivities(newActivities);
     };
-
+ 
     const handleExecutedChange = (index, executedIndex, event) => {
         const { name, value } = event.target;
         const newActivities = activities.map((activitie, i) => {
@@ -40,7 +40,7 @@ function ActivitiesChoice({ formData, handleChange, ACTIVITIES_CHOICES, getActiv
         });
         setActivities(newActivities);
     };
-
+ 
     const handlePerCentChange = (index, perCentIndex, event) => {
         const { name, value } = event.target;
         if (value >= 0 && value <= 100 && value.length <= 3) {
@@ -59,7 +59,7 @@ function ActivitiesChoice({ formData, handleChange, ACTIVITIES_CHOICES, getActiv
             setActivities(newActivities);
         }
     };
-
+ 
     const handleAddExecuted = (index) => {
         const newActivities = activities.map((activitie, i) => {
             if (i === index) {
@@ -69,7 +69,7 @@ function ActivitiesChoice({ formData, handleChange, ACTIVITIES_CHOICES, getActiv
         });
         setActivities(newActivities);
     };
-
+ 
     const handleRemoveExecuted = (index, executedIndex) => {
         const newActivities = activities.map((activitie, i) => {
             if (i === index) {
@@ -81,12 +81,12 @@ function ActivitiesChoice({ formData, handleChange, ACTIVITIES_CHOICES, getActiv
         });
         setActivities(newActivities);
     };
-
+ 
     const handleRemoveActivity = (index) => {
         const newActivities = activities.filter((_, i) => i !== index);
         setActivities(newActivities);
     };
-
+ 
     return (
         <div className="text-center type-activities">
             <button type="button" className="add-button" onClick={handleAddActivitie}>+</button>
@@ -102,7 +102,7 @@ function ActivitiesChoice({ formData, handleChange, ACTIVITIES_CHOICES, getActiv
                         </select>
                         <button type="button" className="remove-button" onClick={() => handleRemoveActivity(index)}>X</button>
                     </div>
-
+ 
                     {activitie.activitiesType && (
                         <div className="text-center type--activities">
                             <div className="font-size">Atividade Executada:</div>
@@ -130,7 +130,7 @@ function ActivitiesChoice({ formData, handleChange, ACTIVITIES_CHOICES, getActiv
                                         <button type="button" className="remove-button" onClick={() => handleRemoveExecuted(index, executedIndex)}>X</button>
                                     )}
                                     </div>
-                                    
+                                   
                             ))}
                             <button type="button" className="add-executed-button" onClick={() => handleAddExecuted(index)}>Adicionar Atividade</button>
                         </div>
@@ -140,5 +140,6 @@ function ActivitiesChoice({ formData, handleChange, ACTIVITIES_CHOICES, getActiv
         </div>
     );
 }
-
+ 
 export default ActivitiesChoice;
+ 
