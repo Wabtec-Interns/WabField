@@ -112,3 +112,14 @@
             ["delivery_term_filling", "Preenchimento de Termo de Entrega"],
             ["as_built", "As Built"]
         ];
+    
+    export const COMPANY_CHOICES = [
+            ["Company 1", "Empresa 1"],
+            ["Company 2", "Empresa 2"],
+          ];
+          
+    export const RESPONSABLE_CHOICES = [
+            ["Acauã Ferreira", "Acauã Ferreira"],
+            ["Ana Amélia", "Ana Amélia"],
+            ["External", "Externo"],
+          ];

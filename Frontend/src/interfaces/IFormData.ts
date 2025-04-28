@@ -1,4 +1,4 @@
-export interface ReportData {
+export type FormData = {
   id: number;
   status: string;
   type: string;
@@ -13,6 +13,11 @@ export interface ReportData {
   nightWork: string;
   weatherCondition: string;
   workCondition: string;
+  typeContract: string;
+  directProfissional: string;
+  indirectProfissional: string;
+  outsourcedProfissional: string;
+  professional: string;
   nameWork: string;
   responsable: string;
   company: string;
@@ -22,14 +27,14 @@ export interface ReportData {
   hourEnd: string;
   hourRestBegin: string;
   hourRestEnd: string;
-  activitiesType?: string;
-  activitiesExecuted?: string;
-  activitiesPerCent?: string;
-  contracts?: Array<{typeContract: string, professional: string, quantity: string}>;
-  activities?: Array<{activitiesType: string, activitiesExecuted: string, activitiesPerCent: string}>;
+  activitiesType: string;
+  activitiesExecuted: string;
+  activitiesPerCent: string;
+  contracts: [], 
+  activities: [],
   files: {
     image: string[];
     video: string[];
     file: string[];
-  };
+};
 }
