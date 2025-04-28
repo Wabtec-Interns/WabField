@@ -294,16 +294,30 @@ const ReportDetailedView: React.FC = () => {
                 {getPortugueseLabel(ACTIVITIES_CHOICES, activity.activitiesType)}
               </p>
               {activity.activitiesExecuted && (
-                <p>
-                  Atividade - Executadas: {""}
-                  {activity.activitiesType === "Activities 1" ? getPortugueseLabel(TYPE_ACTIVITIES1, activity.activitiesExecuted.join(',')) :
-                  activity.activitiesType === "Activities 2" ? getPortugueseLabel(TYPE_ACTIVITIES2, activity.activitiesExecuted.join(',')) :
-                  activity.activitiesType === "Activities 3" ? getPortugueseLabel(TYPE_ACTIVITIES3, activity.activitiesExecuted.join(',')) :
-                  activity.activitiesExecuted.join(',')}
-                </p>
+                <div>
+                  <p>Atividade - Executadas:</p>
+                  <ul className="list-disc ml-5">
+                    {activity.activitiesExecuted.map((exc, idx) => (
+                      <li key={idx}>
+                        {activity.activitiesType === "Activities 1"
+                          ? getPortugueseLabel(TYPE_ACTIVITIES1, exc)
+                          : activity.activitiesType === "Activities 2"
+                          ? getPortugueseLabel(TYPE_ACTIVITIES2, exc)
+                          : activity.activitiesType === "Activities 3"
+                          ? getPortugueseLabel(TYPE_ACTIVITIES3, exc)
+                          : exc}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               )}
               {activity.activitiesPerCent && (
-                <p>Atividade - Percentual: {activity.activitiesPerCent.join(', ')}%</p>
+                <p>
+                  Atividade - Percentual:{" "}
+                  {activity.activitiesPerCent.map((perc, idx) =>
+                    idx === activity.activitiesPerCent.length - 1 ? `${perc}%` : `${perc}%, `
+                  )}
+                </p>
               )}
             </div>
           ))}
