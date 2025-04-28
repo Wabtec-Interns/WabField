@@ -4,6 +4,7 @@ import { ReportData } from '@/interfaces/IreportData';
 import { REPORT_STATUS_CHOICES, TYPE_REPORT_CHOICES, WEATHER_CONDITION_CHOICES, WORK_CONDITION_CHOICES, TYPE_CONTRACT_CHOICES, DIRECT_PROFISSIONAL_CHOICES, INDIRECT_PROFISSIONAL_CHOICES, OUTSOURCED_PROFISSIONAL_CHOICES, ACTIVITIES_CHOICES, TYPE_ACTIVITIES1, TYPE_ACTIVITIES2, TYPE_ACTIVITIES3 } from '@/interfaces/IReportChoices';
 import * as XLSX from 'xlsx';
 import {saveAs} from 'file-saver'
+import renderfiles from '@/components/renderfiles';
 
 const ReportDetailedView: React.FC = () => {
   const data = JSON.parse(localStorage.getItem('reportData') || '{}') as ReportData;
@@ -269,6 +270,9 @@ const ReportDetailedView: React.FC = () => {
           ))}
         </div>
       )}
+
+      {/* Arquivos enviados */}
+      {data.files && renderfiles(data.files)}
       </main>
     </div>
   );

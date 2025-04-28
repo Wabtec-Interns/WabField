@@ -27,4 +27,9 @@ export interface ReportData {
   activitiesPerCent?: string;
   contracts?: Array<{typeContract: string, professional: string, quantity: string}>;
   activities?: Array<{activitiesType: string, activitiesExecuted: string, activitiesPerCent: string}>;
+  files: {
+    image: string[];
+    video: string[];
+    file: string[];
+  };
 }
