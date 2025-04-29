@@ -272,7 +272,13 @@ const ReportDetailedView: React.FC = () => {
       )}
 
       {/* Arquivos enviados */}
-      {data.files && renderfiles(data.files)}
+      {data.files && (
+        <div className="border border-gray-200 rounded p-3">
+          <h2 className="text-lg font-semibold">Arquivos enviados</h2>
+          {renderfiles({files: data.files})}
+        </div>
+      )}
+      
       </main>
     </div>
   );
