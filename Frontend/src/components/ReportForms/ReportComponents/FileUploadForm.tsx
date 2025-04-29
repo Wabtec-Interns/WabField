@@ -43,7 +43,7 @@ const FileUploadForm: React.FC<FileUploadFormProps> = ({ formData, setFormData }
   };
 
   return (
-    <form className="file-upload-form">
+    <div className="file-upload-form">
       <div className="upload-section">
         <label htmlFor="image-upload" className="upload-label">
           <span className="upload-icon">📁</span>
@@ -89,7 +89,7 @@ const FileUploadForm: React.FC<FileUploadFormProps> = ({ formData, setFormData }
         />
         <div className="file-count">Arquivos selecionados: {files.file.length}</div>
       </div>
-    </form>
+    </div>
   );
 };
 
